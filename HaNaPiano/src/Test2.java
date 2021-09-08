@@ -5,6 +5,7 @@ public class Test2 {
 		// TODO Auto-generated method stub
 		System.out.println("Test2-1");
 		System.out.println("Test2-22");
+		System.out.println("Test2-3");
 	}
 
 }
