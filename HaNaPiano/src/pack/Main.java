@@ -32,7 +32,7 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
 		
 		// 처음 스플래쉬 화면 띄우기
-		ImageIcon ii = new ImageIcon("F:\\HaNaPiano\\HaNaPiano\\HaNaPiano\\src\\image\\start.png");
+		ImageIcon ii = new ImageIcon("../HaNaPiano/src/image/start.png");
 		JLabel jl = new JLabel(ii);
 		jl.setSize(1600, 900);
 		frame.add(jl);
@@ -41,7 +41,7 @@ public class Main {
 		
 		Thread.sleep(2000); // 스플래쉬 2초 대기
 		// 2초 후 버튼 화면 띄우기
-		ImageIcon iii = new ImageIcon("F:\\HaNaPiano\\HaNaPiano\\HaNaPiano\\src\\image\\login_start.png");
+		ImageIcon iii = new ImageIcon("../HaNaPiano/src/image/login_start.png");
 		jl.setIcon(iii);
 		
 		// 로그인, 바로 시작 버튼 만들기
