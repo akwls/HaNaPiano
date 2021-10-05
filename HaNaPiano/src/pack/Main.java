@@ -58,14 +58,15 @@ public class Main {
 		btnLogin.setBorderPainted(true); // 테두리 투명도 설정
 		btnLogin.setBorder(new RoundedBorder(195));
 		btnLogin.setFocusable(false);
+		// 온클릭 리스너
 		btnLogin.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	                btnLogin.setBorderPainted(true);
+	                btnLogin.setBorderPainted(true); // 테두리 보이게
 	            } else {
-	            	btnLogin.setBorderPainted(false);
+	            	btnLogin.setBorderPainted(false); // 테두리 안보이게
 	            }
 	        }
 	    });
