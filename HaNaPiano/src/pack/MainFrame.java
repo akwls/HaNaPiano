@@ -29,35 +29,5 @@ public class MainFrame extends JFrame {
 	public void paint(Graphics g) {//그리는 함수
 		g.drawImage(background, 0, 0, null);//background를 그려줌
 	}
-	/*
-
-	public void changeImage(String path) {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		icon = new ImageIcon(Main.class.getResource(path));
-		background = icon.getImage();
-		// System.out.println("이미지 변경");
-		repaint();
-	}
-	*/
-	
-	/*
-	public void layoutButton(JPanel pn) {
-		JButton btnLogin = new JButton();
-		JButton btnStart = new JButton();
-		
-		pn.setLayout(null);
-		
-		btnLogin.setBounds(529, 185, 542, 207);
-		btnStart.setBounds(529, 478, 542, 207);
-		
-		pn.add(btnLogin);
-		pn.add(btnStart);		
-	}
-	*/
 	
 }

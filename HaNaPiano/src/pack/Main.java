@@ -91,6 +91,9 @@ public class Main {
 	    });
 		jl.add(btnStart);
 		
+		btnLogin.addActionListener(new LoginAction());
+		btnStart.addActionListener(new StartAction(frame));
+		
 	}
 	
 	
