@@ -3,7 +3,7 @@ import java.sql.*;
 
 public class MySQLConnect {
 	public MySQLConnect() {
-		
+		// »ý¼ºÀÚ
 	}
 	public void connect() {
 		try {
