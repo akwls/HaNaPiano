@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -29,7 +30,6 @@ public class StartAction extends JFrame implements ActionListener {
 		setResizable(false);//창의 크기를 변경하지 못하게
 		setLocationRelativeTo(null);//창이 가운데 나오게
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
-		Start_Screen();
 	}
 	
 	@Override
@@ -37,6 +37,7 @@ public class StartAction extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub4
 		frame.setVisible(false);
 		setVisible(true);
+		Start_Screen();
 	}
 
 	public void Start_Screen() {
@@ -61,12 +62,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnMusic.setContentAreaFilled(false);
 		btnMusic.setBorderPainted(true);
 		btnMusic.setFocusable(false);
+		btnMusic.setBorder(new LineBorder(new Color(255, 231, 110)));
 		
 		btnMusic.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnMusic.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnMusic.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnMusic.setBorderPainted(false); // 테두리 안보이게
@@ -82,12 +85,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnUp.setContentAreaFilled(false);
 		btnUp.setBorderPainted(true);
 		btnUp.setFocusable(false);
+		btnUp.setBorder(new LineBorder(new Color(255, 231, 110)));
 		
 		btnUp.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnUp.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnUp.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnUp.setBorderPainted(false); // 테두리 안보이게
@@ -103,12 +108,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnDawn.setContentAreaFilled(false);
 		btnDawn.setBorderPainted(true);
 		btnDawn.setFocusable(false);
+		btnDawn.setBorder(new LineBorder(new Color(255, 231, 110)));
 
 		btnDawn.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnDawn.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnDawn.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnDawn.setBorderPainted(false); // 테두리 안보이게
@@ -123,12 +130,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnRecoding.setContentAreaFilled(false);
 		btnRecoding.setBorderPainted(true);
 		btnRecoding.setFocusable(false);
+		btnRecoding.setBorder(new LineBorder(new Color(255, 231, 110)));
 
 		btnRecoding.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnRecoding.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnRecoding.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnRecoding.setBorderPainted(false); // 테두리 안보이게
@@ -143,12 +152,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnStop.setContentAreaFilled(false);
 		btnStop.setBorderPainted(true);
 		btnStop.setFocusable(false);
+		btnStop.setBorder(new LineBorder(new Color(255, 231, 110)));
 		
 		btnStop.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnStop.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnStop.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnStop.setBorderPainted(false); // 테두리 안보이게
@@ -163,12 +174,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnPlay.setContentAreaFilled(false);
 		btnPlay.setBorderPainted(true);
 		btnPlay.setFocusable(false);
+		btnPlay.setBorder(new LineBorder(new Color(255, 231, 110)));
 		
 		btnPlay.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnPlay.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnPlay.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnPlay.setBorderPainted(false); // 테두리 안보이게
@@ -183,12 +196,14 @@ public class StartAction extends JFrame implements ActionListener {
 		btnPause.setContentAreaFilled(false);
 		btnPause.setBorderPainted(true);
 		btnPause.setFocusable(false);
+    	btnPause.setBorder(new LineBorder(new Color(255, 231, 110)));
 		
 		btnPause.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
+	            	btnPause.setBorder(new LineBorder(new Color(112, 112, 112)));
 	            	btnPause.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnPause.setBorderPainted(false); // 테두리 안보이게
