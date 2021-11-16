@@ -1,6 +1,7 @@
 package pack;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -234,6 +235,13 @@ public class LoginAction extends JFrame implements ActionListener {
 	        }
 	    });
 		jl.add(btnUser);
+		
+		Container c = getContentPane();
+		c.setFocusable(true);
+		c.requestFocus();
+		
+		KeyListener playPiano = new KeyListener();
+		c.addKeyListener(playPiano);
 		
 	}
 	
