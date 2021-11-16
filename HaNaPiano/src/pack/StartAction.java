@@ -1,6 +1,7 @@
 package pack;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -211,6 +212,12 @@ public class StartAction extends JFrame implements ActionListener {
 	        }
 	    });
 		jl.add(btnPause);
+		Container c = getContentPane();
+		c.setFocusable(true);
+		c.requestFocus();
+		
+		KeyListener playPiano = new KeyListener();
+		c.addKeyListener(playPiano);
 		
 	}
 
