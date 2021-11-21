@@ -92,7 +92,7 @@ public class Main {
 	    });
 		jl.add(btnStart);
 		
-		btnLogin.addActionListener(new LoginAction(frame));
+		btnLogin.addActionListener(new Login(frame));
 		btnStart.addActionListener(new StartAction(frame));
 		
 	}
