@@ -266,7 +266,7 @@ public class LoginAction extends JFrame implements ActionListener {
 			toast = new Toast(s, 150, 400);
 		}
 		else if(loginCode == 0){
-			s = "비밀번호가 일치하지 않습니다.";
+			s = "비밀번호가 일치하지 않습니다."; 
 			toast = new Toast(s, 150, 400);
 		}
 		return loginCode;
