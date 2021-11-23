@@ -18,7 +18,7 @@ import javax.swing.event.ChangeListener;
 
 public class Login extends JFrame implements ActionListener {
 	
-	MySQLConnect mysql;
+	MySQLConnect mysql;  
 	public JFrame frame;
 
 	public Login(JFrame frame) {
@@ -58,7 +58,6 @@ public class Login extends JFrame implements ActionListener {
 			@Override public void setBorder(Border border) {
 		    }
 		};
-		
 		JButton btnLogin = new JButton();
 		JButton btnJoin = new JButton();
 		

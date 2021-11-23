@@ -74,6 +74,7 @@ public class StartAction extends JFrame implements ActionListener {
 	            	btnMusic.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnMusic.setBorderPainted(false); // 테두리 안보이게   
+	            	btnMusic.setBorderPainted(false); // 테두리 안보이게
 	            }
 	        }
 	    });
