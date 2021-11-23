@@ -18,9 +18,9 @@ public class KeyListener extends KeyAdapter {
 	ArrayList<File> sounds = new ArrayList();
 	// File[] sounds = new File[16];
 	
-	Character[] keys_code = {'a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'i', 'k'};
+	Character[] keys_code = {'a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'k'};
 	ArrayList<Character> keys = new ArrayList<>(Arrays.asList(keys_code));
-	String[] sounds_path = {"DO", "", "RE", "", "MI", "FA", "", "SOL", "", "LA", "", "SI", "", "DO_high"};
+	String[] sounds_path = {"DO", "DOsharp", "RE", "REsharp", "MI", "FA", "FAsharp", "SOL", "SOLsharp", "LA", "LAsharp", "SI", "DO_high"};
 	String path = "../HaNaPiano/src/sound/";
 	
 	public KeyListener() {
