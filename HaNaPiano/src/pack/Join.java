@@ -1,6 +1,5 @@
 package pack;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,16 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class Login extends JFrame implements ActionListener {
+public class Join extends JFrame implements ActionListener{
 	
 	MySQLConnect mysql;  
 	public JFrame frame;
 
-	public Login(JFrame frame) {
+	public Join(JFrame frame) {
 		// 디비 연결 클래스 생성
 		super("하나피아노");
 		mysql = new MySQLConnect();
@@ -39,11 +37,11 @@ public class Login extends JFrame implements ActionListener {
 		mysql.connect();
 		frame.setVisible(false);
 		setVisible(true);
-		LoginFrame();
+		JoinFrame();
 	}
 	
-	public void LoginFrame() {
-		ImageIcon image = new ImageIcon("../HaNaPiano/src/image/login.png");
+	public void JoinFrame() {
+		ImageIcon image = new ImageIcon("../HanaPiano/src/image/join.png");
 		JLabel jl = new JLabel(image);
 		jl.setSize(1600, 900);
 		this.add(jl);
@@ -57,45 +55,43 @@ public class Login extends JFrame implements ActionListener {
 		JTextField text_Pwd = new JTextField() {
 			@Override public void setBorder(Border border) {
 		    }
+		};		JTextField text_PwdCheck = new JTextField() {
+			@Override public void setBorder(Border border) {
+		    }
 		};
-		JButton btnLogin = new JButton();
+		JTextField text_Name = new JTextField() {
+			@Override public void setBorder(Border border) {
+		    }
+		};
+		
 		JButton btnJoin = new JButton();
 		
 		// 아이디 입력
-		text_Id.setBounds(550, 310, 548, 100);
+		text_Id.setBounds(600, 230, 548, 100);
 		text_Id.setText("");
 		text_Id.setOpaque(false);
 		jl.add(text_Id);
-		
+
 		// 비밀번호 입력
-		text_Pwd.setBounds(550, 450, 548, 100);
+		text_Pwd.setBounds(600, 355, 548, 100);
 		text_Pwd.setText("");
 		text_Pwd.setOpaque(false);
 		jl.add(text_Pwd);
 		
-		// 로그인하기
-		btnLogin.setBounds(842, 595, 270, 100);
-		btnLogin.setOpaque(false);
-		btnLogin.setContentAreaFilled(false);
-		btnLogin.setBorderPainted(false);
-		btnLogin.setBorder(new RoundedBorder(100));
-		btnLogin.setFocusable(false);
+		// 비민번호 재입력
+		text_PwdCheck.setBounds(600, 477, 548, 100);
+		text_PwdCheck.setText("");
+		text_PwdCheck.setOpaque(false);
+		jl.add(text_PwdCheck);
+
+		// 이름 입력
+		text_Name.setBounds(600, 602, 548, 100);
+		text_Name.setText("");
+		text_Name.setOpaque(false);
+		jl.add(text_Name);
 		
-		btnLogin.getModel().addChangeListener(new ChangeListener() {
-	        @Override
-	        public void stateChanged(ChangeEvent e) {
-	            ButtonModel model = (ButtonModel) e.getSource();
-	            if (model.isRollover()) {
-	            	btnLogin.setBorderPainted(true); // 테두리 보이게
-	            } else {
-	            	btnLogin.setBorderPainted(false); // 테두리 안보이게
-	            }
-	        }
-	    });		
-		jl.add(btnLogin);
-		
-		// 회원가입 하기
-		btnJoin.setBounds(511, 595, 270, 100);
+		// 회원가입 버튼
+		btnJoin.setBounds(698, 730, 240, 90);
 		btnJoin.setOpaque(false);
 		btnJoin.setContentAreaFilled(false);
 		btnJoin.setBorderPainted(false);
@@ -114,10 +110,8 @@ public class Login extends JFrame implements ActionListener {
 			}
 		});		
 		jl.add(btnJoin);
-				
-		btnJoin.addActionListener(new Join(frame));
-		btnLogin.addActionListener(new LoginAction(frame));
-				
+		
+		btnJoin.addActionListener(new Login(frame));
 	}
-
+	
 }
