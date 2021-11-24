@@ -28,7 +28,6 @@ public class Login implements ActionListener {
 	public Login(JFrame frame) {
 		jframe = new JFrame("하나피아노");
 		// 디비 연결 클래스 생성
-		// super("하나피아노");
 		this.frame = frame;
 		jframe.setLayout(new FlowLayout());
 		jframe.setSize(1600,900);//프레임의 크기
@@ -121,6 +120,7 @@ public class Login implements ActionListener {
 		String pw = "zzzzzzzz";
 		// String pw = Arrays.toString(password);
 		System.out.println(id+pw);
+		btnJoin.addActionListener(new Join(frame));
 		btnLogin.addActionListener(new LoginAction(jframe, id, pw));
 		
 				
