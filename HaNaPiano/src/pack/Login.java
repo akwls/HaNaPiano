@@ -2,43 +2,45 @@ package pack;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class Login extends JFrame implements ActionListener {
+public class Login implements ActionListener {
 	
-	MySQLConnect mysql;  
-	public JFrame frame;
+	// public JFrame frame;
+	JFrame jframe;
+	JFrame frame;
 
 	public Login(JFrame frame) {
+		jframe = new JFrame("하나피아노");
 		// 디비 연결 클래스 생성
-		super("하나피아노");
-		mysql = new MySQLConnect();
 		this.frame = frame;
-		setLayout(new FlowLayout());
-		setSize(1600,900);//프레임의 크기
-		setResizable(false);//창의 크기를 변경하지 못하게
-		setLocationRelativeTo(null);//창이 가운데 나오게
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
+		jframe.setLayout(new FlowLayout());
+		jframe.setSize(1600,900);//프레임의 크기
+		jframe.setResizable(false);//창의 크기를 변경하지 못하게
+		jframe.setLocationRelativeTo(null);//창이 가운데 나오게
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		mysql.connect();
 		frame.setVisible(false);
-		setVisible(true);
+		jframe.setVisible(true);
 		LoginFrame();
 	}
 	
@@ -46,9 +48,9 @@ public class Login extends JFrame implements ActionListener {
 		ImageIcon image = new ImageIcon("../HaNaPiano/src/image/login.png");
 		JLabel jl = new JLabel(image);
 		jl.setSize(1600, 900);
-		this.add(jl);
-		this.setLayout(null);
-		this.setVisible(true);
+		jframe.add(jl);
+		jframe.setLayout(null);
+		jframe.setVisible(true);
 		
 		JTextField text_Id = new JTextField() {
 			@Override public void setBorder(Border border) {
@@ -115,9 +117,12 @@ public class Login extends JFrame implements ActionListener {
 		});		
 		jl.add(btnJoin);
 				
+		String id = "admin";
+		String pw = "zzzzzzzz";
+		// String pw = Arrays.toString(password);
+		System.out.println(id+pw);
 		btnJoin.addActionListener(new Join(frame));
-		btnLogin.addActionListener(new LoginAction(frame));
+		btnLogin.addActionListener(new LoginAction(jframe, id, pw));
 				
 	}
-
 }

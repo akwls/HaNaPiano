@@ -113,5 +113,5 @@ public class Join extends JFrame implements ActionListener{
 		
 		btnJoin.addActionListener(new Login(frame));
 	}
-	
 }
+

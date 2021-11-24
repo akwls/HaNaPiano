@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
 
 public class StartAction extends JFrame implements ActionListener {
 	public JFrame frame;
+	public int check_music = 1;
 
 	public StartAction(JFrame frame) {
 		super("ÇÏ³ªÇÇ¾Æ³ë");
@@ -42,12 +43,22 @@ public class StartAction extends JFrame implements ActionListener {
 	}
 
 	public void Start_Screen() {
-		ImageIcon image = new ImageIcon("../HaNaPiano/src/image/play_start.png");
-		JLabel jl = new JLabel(image);
-		jl.setSize(1600, 900);
-		this.add(jl);
+		ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/start_menu.png");
+		JLabel j1 = new JLabel(menu);
+		j1.setSize(1600, 188);
+		this.add(j1);
 		this.setLayout(null);
 		this.setVisible(true);
+		
+		ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
+		ImageIcon piano_2 = new ImageIcon("../HaNaPiano/src/image/piano_2.png");
+		JLabel j2 = new JLabel(piano_1);
+		//j2.setSize(1600, 712);
+		j2.setBounds(0, 189, 1600, 712);
+		this.add(j2);
+		this.setLayout(null);
+		this.setVisible(true);
+		
 		
 		JButton btnMusic = new JButton();
 		JButton btnUp = new JButton();
@@ -79,7 +90,24 @@ public class StartAction extends JFrame implements ActionListener {
 	        }
 	    });
 		
-		jl.add(btnMusic);
+		j1.add(btnMusic);
+		//btnMusic.addActionListener(new Music(frame));
+		btnMusic.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(check_music == 1) {
+					j2.setIcon(piano_2);
+					j2.setBounds(0, 373, 1600, 493);
+					check_music = 0;
+				}else {
+					j2.setIcon(piano_1);
+					j2.setBounds(0, 189, 1600, 712);
+					check_music = 1;
+				}
+			}
+		});
 		
 		// ¿ÁÅ¸ºê ¿Ã¸®±â
 		btnUp.setBounds(635, 70, 50, 50);
@@ -102,7 +130,7 @@ public class StartAction extends JFrame implements ActionListener {
 	        }
 	    });
 		
-		jl.add(btnUp);
+		j1.add(btnUp);
 		
 		// ¿ÁÅ¸ºê ³»¸®±â
 		btnDawn.setBounds(918, 70, 50, 50);
@@ -124,7 +152,7 @@ public class StartAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
-		jl.add(btnDawn);
+		j1.add(btnDawn);
 		
 		// ³ìÀ½ÇÏ±â
 		btnRecoding.setBounds(1103, 55, 70, 70);
@@ -146,7 +174,7 @@ public class StartAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
-		jl.add(btnRecoding);
+		j1.add(btnRecoding);
 		
 		// ³ìÀ½ ¸ØÃß±â
 		btnStop.setBounds(1185, 55, 70, 70);
@@ -168,7 +196,7 @@ public class StartAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
-		jl.add(btnStop);
+		j1.add(btnStop);
 		
 		// À½¾Ç Àç»ý
 		btnPlay.setBounds(1263, 55, 70, 70);
@@ -190,7 +218,7 @@ public class StartAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
-		jl.add(btnPlay);
+		j1.add(btnPlay);
 		
 		// À½¾Ç Á¤Áö
 		btnPause.setBounds(1345, 55, 70, 70);
@@ -212,7 +240,7 @@ public class StartAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
-		jl.add(btnPause);
+		j1.add(btnPause);
 		Container c = getContentPane();
 		c.setFocusable(true);
 		c.requestFocus();
