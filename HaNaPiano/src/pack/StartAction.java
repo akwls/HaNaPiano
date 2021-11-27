@@ -4,25 +4,38 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.TextAction;
 
 public class StartAction extends JFrame implements ActionListener {
 	public JFrame frame;
 	public int check_music = 1;
+	
+	JLabel title = new JLabel(); // °î ÀÌ¸§
+	String[][] music = {
+			{"°õ¼¼¸¶¸®", "°õ¼¼¸¶¸®_1.png", "°õ¼¼¸¶¸®_2.png", "°õ¼¼¸¶¸®_3.png"}
+						};
+	String path = "../HaNaPiano/src/music/";
+	int musicName = 0, musicNum = 1;
 
 	public StartAction(JFrame frame) {
 		super("ÇÏ³ªÇÇ¾Æ³ë");
@@ -97,14 +110,35 @@ public class StartAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(check_music == 1) {
+				if(check_music == 1) { // ¾Çº¸º¸±â
+					// ¾Çº¸ ¶ç¿ì±â
+					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					JLabel Jl_mu = new JLabel(musicImg);
+					Jl_mu.setBounds(0, 189, 1600, 219);
+					add(Jl_mu);
+					setLayout(null);
+					setVisible(true);
+
+					
+					//System.out.println(music[musicName][0]);
+					title.setText(music[musicName][0]);
+					title.setBounds(180, 35, 200, 100);
+					title.setFont(new Font("SansSerif", Font.BOLD, 35));
+					j1.add(title);
+					j1.setLayout(null);
+					title.setVisible(true);				
+					
+					
+					// ÇÇ¾Æ³ë ¶ç¿ì±â
 					j2.setIcon(piano_2);
 					j2.setBounds(0, 373, 1600, 493);
 					check_music = 0;
+					
 				}else {
 					j2.setIcon(piano_1);
 					j2.setBounds(0, 189, 1600, 712);
 					check_music = 1;
+					title.setVisible(false);
 				}
 			}
 		});
