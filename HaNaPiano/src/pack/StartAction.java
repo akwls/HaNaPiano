@@ -40,7 +40,7 @@ public class StartAction extends JFrame implements ActionListener {
 
 	public StartAction(int musicNum) {
 		this.musicNum = musicNum;
-		System.out.println(this.musicNum);
+		System.out.println(musicNum);
 	}
 	
 	public StartAction(JFrame frame) {
