@@ -219,6 +219,25 @@ public class StartAction extends JFrame implements ActionListener {
 		KeyListener playPiano = new KeyListener();
 		c.addKeyListener(playPiano);
 		
+		btnRecoding.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				KeyListener.recording = true;
+			}
+			
+		});
+		
+		btnPlay.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.recordPlay();
+			}
+		});
+		
 	}
 
 }

@@ -1,6 +1,7 @@
 package pack;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -24,8 +25,11 @@ public class Login implements ActionListener {
 	// public JFrame frame;
 	JFrame jframe;
 	JFrame frame;
+	public static JTextField text_Id;
+	public static JTextField text_Pwd;
 
 	public Login(JFrame frame) {
+		System.out.println("Login.java 실행");
 		jframe = new JFrame("하나피아노");
 		// 디비 연결 클래스 생성
 		this.frame = frame;
@@ -39,7 +43,7 @@ public class Login implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		frame.setVisible(false);
+		if(frame != null) frame.setVisible(false);
 		jframe.setVisible(true);
 		LoginFrame();
 	}
@@ -52,11 +56,21 @@ public class Login implements ActionListener {
 		jframe.setLayout(null);
 		jframe.setVisible(true);
 		
-		JTextField text_Id = new JTextField() {
+		text_Id = new JTextField() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override public void setBorder(Border border) {
 		    }
 		};
-		JTextField text_Pwd = new JTextField() {
+		text_Pwd = new JTextField() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override public void setBorder(Border border) {
 		    }
 		};
@@ -67,6 +81,7 @@ public class Login implements ActionListener {
 		text_Id.setBounds(550, 310, 548, 100);
 		text_Id.setText("");
 		text_Id.setOpaque(false);
+		text_Id.setEditable(true);
 		jl.add(text_Id);
 		
 		// 비밀번호 입력
@@ -116,12 +131,17 @@ public class Login implements ActionListener {
 			}
 		});		
 		jl.add(btnJoin);
-		String id = "admin";
-		String pw = "zzzzzzzz";
+		jframe.add(jl);
+		Container cc = jframe.getContentPane();
+		cc.setFocusable(true);
+		text_Id.requestFocus();
+		// String id = text_Id.getText();
+		text_Pwd.requestFocus();
+		// String pw = text_Pwd.getText(); 
+		// System.out.println("아이디 : " + text_Id.getText() +", 비밀번호 : " + pw);
 		// String pw = Arrays.toString(password);
-		System.out.println(id+pw);
-		btnJoin.addActionListener(new Join(frame));
-		btnLogin.addActionListener(new LoginAction(jframe, id, pw));
+		btnJoin.addActionListener(new Join(jframe));
+		btnLogin.addActionListener(new LoginAction(jframe));
 		
 				
 	}
