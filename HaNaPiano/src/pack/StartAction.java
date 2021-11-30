@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonModel;
@@ -37,6 +38,11 @@ public class StartAction extends JFrame implements ActionListener {
 	String path = "../HaNaPiano/src/music/";
 	int musicName = 0, musicNum = 1;
 
+	public StartAction(int musicNum) {
+		this.musicNum = musicNum;
+		System.out.println(this.musicNum);
+	}
+	
 	public StartAction(JFrame frame) {
 		super("ÇÏ³ªÇÇ¾Æ³ë");
 		this.frame = frame;
@@ -54,7 +60,7 @@ public class StartAction extends JFrame implements ActionListener {
 		setVisible(true);
 		Start_Screen();
 	}
-
+	
 	public void Start_Screen() {
 		ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/start_menu.png");
 		JLabel j1 = new JLabel(menu);
@@ -64,7 +70,6 @@ public class StartAction extends JFrame implements ActionListener {
 		this.setVisible(true);
 		
 		ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
-		ImageIcon piano_2 = new ImageIcon("../HaNaPiano/src/image/piano_2.png");
 		JLabel j2 = new JLabel(piano_1);
 		//j2.setSize(1600, 712);
 		j2.setBounds(0, 189, 1600, 712);
@@ -106,33 +111,17 @@ public class StartAction extends JFrame implements ActionListener {
 		j1.add(btnMusic);
 		//btnMusic.addActionListener(new Music(frame));
 		btnMusic.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(check_music == 1) { // ¾Çº¸º¸±â
-					// ¾Çº¸ ¶ç¿ì±â
-					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
-					JLabel Jl_mu = new JLabel(musicImg);
-					Jl_mu.setBounds(0, 189, 1600, 219);
-					add(Jl_mu);
-					setLayout(null);
-					setVisible(true);
+					showMusic(j1, j2);
 
+					//MusicListener mu = new MusicListener(musicName, musicNum);
+					addKeyListener(new MusicListener(musicName, musicNum));
 					
-					//System.out.println(music[musicName][0]);
-					title.setText(music[musicName][0]);
-					title.setBounds(180, 35, 200, 100);
-					title.setFont(new Font("SansSerif", Font.BOLD, 35));
-					j1.add(title);
-					j1.setLayout(null);
-					title.setVisible(true);				
-					
-					
-					// ÇÇ¾Æ³ë ¶ç¿ì±â
-					j2.setIcon(piano_2);
-					j2.setBounds(0, 373, 1600, 493);
-					check_music = 0;
+					showMusic(j1, j2);
+						
 					
 				}else {
 					j2.setIcon(piano_1);
@@ -275,13 +264,39 @@ public class StartAction extends JFrame implements ActionListener {
 	        }
 	    });
 		j1.add(btnPause);
+		
 		Container c = getContentPane();
 		c.setFocusable(true);
 		c.requestFocus();
 		
 		KeyListener playPiano = new KeyListener();
 		c.addKeyListener(playPiano);
-		
 	}
 
+	public void showMusic(JLabel j1, JLabel j2) {
+		// ¾Çº¸ ¶ç¿ì±â
+		ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+		JLabel Jl_mu = new JLabel(musicImg);
+		Jl_mu.setBounds(0, 189, 1600, 219);
+		add(Jl_mu);
+		setLayout(null);
+		setVisible(true);
+
+		
+		//System.out.println(music[musicName][0]);
+		title.setText(music[musicName][0]);
+		title.setBounds(180, 35, 200, 100);
+		title.setFont(new Font("SansSerif", Font.BOLD, 35));
+		j1.add(title);
+		j1.setLayout(null);
+		title.setVisible(true);				
+		
+		ImageIcon piano_2 = new ImageIcon("../HaNaPiano/src/image/piano_2.png");
+		// ÇÇ¾Æ³ë ¶ç¿ì±â
+		j2.setIcon(piano_2);
+		j2.setBounds(0, 373, 1600, 493);
+		check_music = 0;
+	}
+	
 }
+
