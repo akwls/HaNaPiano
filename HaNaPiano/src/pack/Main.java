@@ -21,6 +21,7 @@ import javax.swing.event.ChangeListener;
 public class Main {
 	// ImageIcon icon = new ImageIcon(Main.class.getResource("../image/start.png"));
 	// static Graphics background = icon.getImage();
+	public static MySQLConnect mysql = new MySQLConnect();
 
 	public static void main(String[] args) throws Exception {
 		
@@ -39,8 +40,8 @@ public class Main {
 		frame.add(jl);
 		frame.setLayout(null);
 		frame.setVisible(true);
+		mysql.connect();
 		
-		Thread.sleep(2000); // 스플래쉬 2초 대기
 		// 2초 후 버튼 화면 띄우기
 		ImageIcon iii = new ImageIcon("../HaNaPiano/src/image/login_start.png");
 		jl.setIcon(iii);

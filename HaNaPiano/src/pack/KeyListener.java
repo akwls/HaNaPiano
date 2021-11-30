@@ -15,13 +15,18 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class KeyListener extends KeyAdapter {
-	ArrayList<File> sounds = new ArrayList();
+	public static ArrayList<File> sounds = new ArrayList();
 	// File[] sounds = new File[16];
 	
 	Character[] keys_code = {'a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'k'};
 	ArrayList<Character> keys = new ArrayList<>(Arrays.asList(keys_code));
 	String[] sounds_path = {"DO", "DOsharp", "RE", "REsharp", "MI", "FA", "FAsharp", "SOL", "SOLsharp", "LA", "LAsharp", "SI", "DO_high"};
 	String path = "../HaNaPiano/src/sound/";
+	public static ArrayList<Integer> recordKey = new ArrayList<>();
+	
+	public static boolean recording = false;
+	int keySecond = 0;
+	int currentSecond;
 	
 	public KeyListener() {
 		for(int i=0; i<sounds_path.length; i++) {
@@ -36,6 +41,9 @@ public class KeyListener extends KeyAdapter {
 			int i = keys.indexOf(c);
 			AudioInputStream stream;
 			try {
+				if(this.recording) {
+					recordKey.add(i);
+				}
 				stream = AudioSystem.getAudioInputStream(sounds.get(i));
 				Clip clip = AudioSystem.getClip();
 	            clip.open(stream);
@@ -46,6 +54,23 @@ public class KeyListener extends KeyAdapter {
 				e1.printStackTrace(); 
 			}
             
+		}
+		
+	}
+	public static void recordPlay() {
+		AudioInputStream stream;
+		try {
+			for(int i=0; i<recordKey.size(); i++) {
+				stream = AudioSystem.getAudioInputStream(sounds.get(recordKey.get(i)));
+				Clip clip = AudioSystem.getClip();
+	            clip.open(stream);
+	            clip.start();
+	            Thread.sleep(500);
+			}
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace(); 
 		}
 		
 	}

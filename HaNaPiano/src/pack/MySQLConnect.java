@@ -27,7 +27,7 @@ public class MySQLConnect {
 		
 		Statement stmt = null; // 3. 명령어 처리 객체 생성
 		try {
-			stmt = conn.createStatement();
+			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		} catch(SQLException ee) {
 			System.out.println("작업 처리 객체 생성 실패");
 		}
@@ -39,27 +39,29 @@ public class MySQLConnect {
 		int cnt = 0;
 		try {
 			String sql = "select * from user where id = ?";
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
-			while(rs.next()) {
-				cnt++;
-			}
-			if(cnt < 1) {
+			rs.last();
+			int rowCount = rs.getRow();
+			rs.beforeFirst();
+			if(rowCount < 1) {
 				stmt.close();
 				return 1;
 			}
 			else {
 				cnt = 0;
 				sql = "select * from user where id = ? and pw = ?";
-				stmt = conn.prepareStatement(sql);
+				stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
 				stmt.setString(1, id);
 				stmt.setString(2, pw);
 				rs = stmt.executeQuery();
-				while(rs.next()) {
-					cnt++;
-				}
-				if(cnt == 1) {
+				rs.last();
+				rowCount = rs.getRow();
+				rs.beforeFirst();
+				if(rowCount == 1) {
 					stmt.close();
 					return 2;
 				}
@@ -73,6 +75,8 @@ public class MySQLConnect {
 		}
 		return 0;
 	}
+	
+	
 	void closing() {
 		try {
 			// rs.close();
@@ -80,6 +84,44 @@ public class MySQLConnect {
 		} catch(SQLException ee) {
 			System.out.println("접속 종료 실패"+ee.toString());
 		}
+	}
+	
+	
+	int join(String id, String pw, String name) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+		try {
+			String sql = "select * from user where id = ?";
+			stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_UPDATABLE);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			rs.last();
+			int rowCount = rs.getRow();
+			rs.beforeFirst();
+			while(rs.next()) {
+				cnt++;
+			}
+			if(cnt > 0) {
+				stmt.close();
+				return 1;
+			}
+			else {
+				cnt = 0;
+				sql = "insert into user values(?, ?, ?)";
+				stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
+				stmt.setString(1, id);
+				stmt.setString(2, pw);
+				stmt.setString(3, name);
+				stmt.executeUpdate();
+				return 2;
+			}
+		} catch(SQLException ee) {
+			System.out.println("명령어 전송 실패"+ee.toString());
+		}
+		return 0;
 	}
 }
 

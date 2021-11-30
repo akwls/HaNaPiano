@@ -18,14 +18,14 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class LoginAction extends JFrame implements ActionListener {
-	MySQLConnect mysql = new MySQLConnect();
+	
 	public JFrame frame;
 	String id, pw;
 	Toast toast = null;
-	public LoginAction(JFrame frame, String id, String pw) {
+	public LoginAction(JFrame frame) {
 		// 디비 연결 클래스 생성
 		super("하나피아노");
-		mysql = new MySQLConnect();
+		
 		this.frame = frame;
 		setLayout(new FlowLayout());
 		setSize(1600,900);//프레임의 크기
@@ -33,14 +33,16 @@ public class LoginAction extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);//창이 가운데 나오게
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
 		
-		mysql.connect();
-		this.id = id;
-		this.pw = pw;
+		
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub'
+		// TODO Auto-generated method stub
+		this.id = Login.text_Id.getText();
+		this.pw = Login.text_Pwd.getText();
+		System.out.println("아이디 : " + this.id+", 비밀번호 : " + this.pw);
 		int code = processLogin();
 		toast.showtoast();
 		if(code == 2) {
@@ -254,20 +256,20 @@ public class LoginAction extends JFrame implements ActionListener {
 		
 	}
 	public int processLogin() {
-		int loginCode = mysql.login(this.id, this.pw);
+		int loginCode = Main.mysql.login(this.id, this.pw);
 		
 		String s = "";
 		if(loginCode == 1) {
 			s = "아이디가 존재하지 않습니다.";
-			toast = new Toast(s, 150, 400);
+			toast = new Toast(s, 800, 700);
 		}
 		else if(loginCode == 2) {
 			s = "로그인에 성공하였습니다.";
-			toast = new Toast(s, 150, 400);
+			toast = new Toast(s, 800, 700);
 		}
 		else if(loginCode == 0){
 			s = "비밀번호가 일치하지 않습니다."; 
-			toast = new Toast(s, 150, 400);
+			toast = new Toast(s, 800, 700);
 		}
 		return loginCode;
 		
