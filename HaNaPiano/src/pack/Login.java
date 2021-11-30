@@ -74,6 +74,7 @@ public class Login implements ActionListener {
 			@Override public void setBorder(Border border) {
 		    }
 		};
+		
 		JButton btnLogin = new JButton();
 		JButton btnJoin = new JButton();
 		
