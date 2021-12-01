@@ -22,6 +22,9 @@ public class LoginAction extends JFrame implements ActionListener {
 	public JFrame frame;
 	String id, pw;
 	Toast toast = null;
+	public Thread th= null;
+	int recordCnt;
+	
 	public LoginAction(JFrame frame) {
 		// 디비 연결 클래스 생성
 		super("하나피아노");
@@ -251,6 +254,59 @@ public class LoginAction extends JFrame implements ActionListener {
 		
 		KeyListener playPiano = new KeyListener();
 		c.addKeyListener(playPiano);
+		
+		btnRecoding.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				KeyListener.recording = true;
+				KeyListener.recordKey.clear();
+				KeyListener.keySecond = System.currentTimeMillis();
+			}
+			
+		});
+		
+		btnPlay.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				th = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						KeyListener.recordPlay();
+					}
+				});
+				th.start();
+				recordCnt = Main.mysql.getRecordCnt(id);
+				Main.mysql.setRecordCnt(id, recordCnt+1);
+			}
+		});
+		
+		btnStop.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.recording = false;
+				RecordFile recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id);
+				recordfile.recordFile();
+				
+			}
+		});
+		
+		btnPause.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.playing = false;
+				
+			}
+		});
 		
 	}
 	public int processLogin() {

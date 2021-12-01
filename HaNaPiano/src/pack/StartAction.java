@@ -30,6 +30,7 @@ import javax.swing.text.TextAction;
 
 public class StartAction extends JFrame implements ActionListener {
 	public JFrame frame;
+	public Thread th= null;
 	public int check_music = 1;
 	public MusicListener mu;
 	public JLabel Jl_mu = new JLabel();
@@ -292,6 +293,8 @@ public class StartAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				KeyListener.recording = true;
+				KeyListener.recordKey.clear();
+				KeyListener.keySecond = System.currentTimeMillis();
 			}
 			
 		});
@@ -301,7 +304,33 @@ public class StartAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				KeyListener.recordPlay();
+				th = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						KeyListener.recordPlay();
+					}
+				});
+				th.start();
+			}
+		});
+		
+		btnStop.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.recording = false;
+			}
+		});
+		
+		btnPause.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.playing = false;
 			}
 		});
 	}

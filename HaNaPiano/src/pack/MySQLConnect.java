@@ -123,4 +123,39 @@ public class MySQLConnect {
 		}
 		return 0;
 	}
+	
+	public int getRecordCnt(String id) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select record from user where id = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			rs.next();
+			result = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public void setRecordCnt(String id, int cnt) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "update user set record = ? where id = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cnt);
+			stmt.setString(2, id);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
