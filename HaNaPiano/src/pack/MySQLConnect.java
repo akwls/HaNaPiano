@@ -124,4 +124,3 @@ public class MySQLConnect {
 		return 0;
 	}
 }
-

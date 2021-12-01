@@ -114,5 +114,5 @@ public class Join implements ActionListener{
 		
 		btnJoin.addActionListener(new JoinAction(jframe));
 	}
+	
 }
-

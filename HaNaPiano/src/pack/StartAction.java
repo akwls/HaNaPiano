@@ -117,8 +117,8 @@ public class StartAction extends JFrame implements ActionListener {
 				if(check_music == 1) { // ¾Çº¸º¸±â
 					showMusic(j1, j2);
 
-					//MusicListener mu = new MusicListener(musicName, musicNum);
-					addKeyListener(new MusicListener(musicName, musicNum));
+					MusicListener mu = new MusicListener(musicName, musicNum);
+					addKeyListener(mu);
 					
 					showMusic(j1, j2);
 						

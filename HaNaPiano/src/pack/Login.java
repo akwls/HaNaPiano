@@ -74,7 +74,6 @@ public class Login implements ActionListener {
 			@Override public void setBorder(Border border) {
 		    }
 		};
-		
 		JButton btnLogin = new JButton();
 		JButton btnJoin = new JButton();
 		
@@ -132,13 +131,6 @@ public class Login implements ActionListener {
 			}
 		});		
 		jl.add(btnJoin);
-				
-		String id = "admin";
-		String pw = "zzzzzzzz";
-		// String pw = Arrays.toString(password);
-		System.out.println(id+pw);
-		btnJoin.addActionListener(new Join(frame));
-		btnLogin.addActionListener(new LoginAction(jframe, id, pw));
 		jframe.add(jl);
 		Container cc = jframe.getContentPane();
 		cc.setFocusable(true);
@@ -150,6 +142,7 @@ public class Login implements ActionListener {
 		// String pw = Arrays.toString(password);
 		btnJoin.addActionListener(new Join(jframe));
 		btnLogin.addActionListener(new LoginAction(jframe));
+		
 				
 	}
 }

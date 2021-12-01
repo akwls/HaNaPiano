@@ -14,7 +14,7 @@ public class JoinAction implements ActionListener {
 	
 	public JoinAction(JFrame frame) {
 		this.frame = frame;
-	}    
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
