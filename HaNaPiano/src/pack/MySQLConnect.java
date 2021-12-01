@@ -109,7 +109,7 @@ public class MySQLConnect {
 			}
 			else {
 				cnt = 0;
-				sql = "insert into user values(?, ?, ?)";
+				sql = "insert into user (id, pw, name) values(?, ?, ?)";
 				stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE);
 				stmt.setString(1, id);
@@ -122,6 +122,41 @@ public class MySQLConnect {
 			System.out.println("명령어 전송 실패"+ee.toString());
 		}
 		return 0;
+	}
+	
+	public int getRecordCnt(String id) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "select record from user where id = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			rs.next();
+			result = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public void setRecordCnt(String id, int cnt) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "update user set record = ? where id = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cnt);
+			stmt.setString(2, id);
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

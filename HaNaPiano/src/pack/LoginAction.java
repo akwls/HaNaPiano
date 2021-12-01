@@ -23,6 +23,7 @@ public class LoginAction extends JFrame implements ActionListener {
 	String id, pw;
 	Toast toast = null;
 	public Thread th= null;
+	int recordCnt;
 	
 	public LoginAction(JFrame frame) {
 		// 디비 연결 클래스 생성
@@ -282,6 +283,8 @@ public class LoginAction extends JFrame implements ActionListener {
 					}
 				});
 				th.start();
+				recordCnt = Main.mysql.getRecordCnt(id);
+				Main.mysql.setRecordCnt(id, recordCnt+1);
 			}
 		});
 		
@@ -291,6 +294,9 @@ public class LoginAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				KeyListener.recording = false;
+				RecordFile recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id);
+				recordfile.recordFile();
+				
 			}
 		});
 		
@@ -300,6 +306,7 @@ public class LoginAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				KeyListener.playing = false;
+				
 			}
 		});
 		
