@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
 
 public class StartAction extends JFrame implements ActionListener {
 	public JFrame frame;
+	public Thread th= null;
 
 	public StartAction(JFrame frame) {
 		super("하나피아노");
@@ -225,6 +226,8 @@ public class StartAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				KeyListener.recording = true;
+				KeyListener.recordKey.clear();
+				KeyListener.keySecond = System.currentTimeMillis();
 			}
 			
 		});
@@ -234,7 +237,33 @@ public class StartAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				KeyListener.recordPlay();
+				th = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						KeyListener.recordPlay();
+					}
+				});
+				th.start();
+			}
+		});
+		
+		btnStop.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.recording = false;
+			}
+		});
+		
+		btnPause.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				KeyListener.playing = false;
 			}
 		});
 		
