@@ -15,7 +15,7 @@ public class MySQLConnect {
 			System.out.println("DB 연결 드라이브가 없음");
 		}
 		
-		String url = "jdbc:mysql: //127.0.0.1:3306/hanapiano_db";
+		String url = "jdbc:mysql://127.0.0.1:3306/hanapiano_db";
 		String id = "root";
 		String pw = "mirim";
 		
@@ -109,7 +109,7 @@ public class MySQLConnect {
 			}
 			else {
 				cnt = 0;
-				sql = "insert into user values(?, ?, ?)";
+				sql = "insert into user (id, pw, name) values(?, ?, ?)";
 				stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE);
 				stmt.setString(1, id);

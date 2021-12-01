@@ -11,8 +11,7 @@ import javax.swing.JLabel;
 
 public class MusicListener extends KeyAdapter {
 	int musicName, musicNum;
-	JLabel j1, j2;
-	StartAction obj;
+	StartAction sta = new StartAction();
 	
 	public MusicListener() {}
 	
@@ -21,15 +20,14 @@ public class MusicListener extends KeyAdapter {
 		this.musicNum = musicNum;
 	}
 
+
 	public void keyPressed(KeyEvent e) {
-		System.out.println(musicNum);
 		int keyCode = e.getKeyCode();
 		
 		switch(keyCode) {
 		case KeyEvent.VK_RIGHT:
 			musicNum++;
-			System.out.println(musicNum);
-			//obj = new StartAction(musicNum);
+			sta.test(musicNum);
 			break;
 		}
 		
@@ -37,7 +35,7 @@ public class MusicListener extends KeyAdapter {
 	
 	public int getmusicNum() {
 		
-		return this.musicNum;
+		return musicNum;
 	}
 	
 }

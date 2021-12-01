@@ -1,6 +1,7 @@
 package pack;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -30,6 +31,9 @@ import javax.swing.text.TextAction;
 public class StartAction extends JFrame implements ActionListener {
 	public JFrame frame;
 	public int check_music = 1;
+	public MusicListener mu;
+	public JLabel Jl_mu = new JLabel();
+	public Label la = new Label();
 	
 	JLabel title = new JLabel(); // 곡 이름
 	String[][] music = {
@@ -38,6 +42,8 @@ public class StartAction extends JFrame implements ActionListener {
 	String path = "../HaNaPiano/src/music/";
 	int musicName = 0, musicNum = 1;
 
+	public StartAction() {}
+	
 	public StartAction(int musicNum) {
 		this.musicNum = musicNum;
 		System.out.println(musicNum);
@@ -60,23 +66,29 @@ public class StartAction extends JFrame implements ActionListener {
 		setVisible(true);
 		Start_Screen();
 	}
+
 	
 	public void Start_Screen() {
-		ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/start_menu.png");
-		JLabel j1 = new JLabel(menu);
-		j1.setSize(1600, 188);
-		this.add(j1);
+		//ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/start_menu.png");
+		//JLabel j1 = new JLabel(menu);
+		la.j1.setSize(1600, 188);
+		this.add(la.j1);
 		this.setLayout(null);
 		this.setVisible(true);
 		
-		ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
-		JLabel j2 = new JLabel(piano_1);
-		//j2.setSize(1600, 712);
-		j2.setBounds(0, 189, 1600, 712);
-		this.add(j2);
+		//ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
+		//JLabel j2 = new JLabel(piano_1);
+		la.j2.setSize(1600, 712);
+		la.j2.setBounds(0, 189, 1600, 712);
+		this.add(la.j2);
 		this.setLayout(null);
 		this.setVisible(true);
 		
+		la.j3.setSize(1600, 219);
+		la.j3.setBounds(0, 189, 1600, 219);
+		this.add(la.j3);
+		this.setLayout(null);
+		this.setVisible(true);
 		
 		JButton btnMusic = new JButton();
 		JButton btnUp = new JButton();
@@ -108,29 +120,30 @@ public class StartAction extends JFrame implements ActionListener {
 	        }
 	    });
 		
-		j1.add(btnMusic);
+		la.j1.add(btnMusic);
 		//btnMusic.addActionListener(new Music(frame));
 		btnMusic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(check_music == 1) { // 악보보기
-					showMusic(j1, j2);
-
-					MusicListener mu = new MusicListener(musicName, musicNum);
-					addKeyListener(mu);
-					
-					showMusic(j1, j2);
-						
-					
+					showMusic(la.j1, la.j2, la.j3);					
+										
 				}else {
-					j2.setIcon(piano_1);
-					j2.setBounds(0, 189, 1600, 712);
+					la.j2.setIcon(la.piano_1);
+					la.j2.setBounds(0, 189, 1600, 712);
 					check_music = 1;
 					title.setVisible(false);
 				}
 			}
 		});
+		
+		Container cc = getContentPane();
+		cc.setFocusable(true);
+		cc.requestFocus();
+		mu = new MusicListener(musicName, musicNum);
+		cc.addKeyListener(mu);
+		
 		
 		// 옥타브 올리기
 		btnUp.setBounds(635, 70, 50, 50);
@@ -153,7 +166,7 @@ public class StartAction extends JFrame implements ActionListener {
 	        }
 	    });
 		
-		j1.add(btnUp);
+		la.j1.add(btnUp);
 		
 		// 옥타브 내리기
 		btnDawn.setBounds(918, 70, 50, 50);
@@ -175,95 +188,96 @@ public class StartAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
-		j1.add(btnDawn);
+		la.j1.add(btnDawn);
 		
 		// 녹음하기
-		btnRecoding.setBounds(1103, 55, 70, 70);
+		btnRecoding.setBounds(1105, 59, 68, 68);
 		btnRecoding.setOpaque(false);
 		btnRecoding.setContentAreaFilled(false);
-		btnRecoding.setBorderPainted(true);
+		btnRecoding.setBorderPainted(false);
 		btnRecoding.setFocusable(false);
-		btnRecoding.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnRecoding.setBorder(new RoundedBorder(50));
 
 		btnRecoding.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnRecoding.setBorder(new LineBorder(new Color(112, 112, 112)));
+	        		btnRecoding.setBorder(new RoundedBorder(50));
 	            	btnRecoding.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnRecoding.setBorderPainted(false); // 테두리 안보이게
 	            }
 	        }
 	    });
-		j1.add(btnRecoding);
+		la.j1.add(btnRecoding);
 		
 		// 녹음 멈추기
-		btnStop.setBounds(1185, 55, 70, 70);
+		btnStop.setBounds(1185, 59, 68, 68);
 		btnStop.setOpaque(false);
 		btnStop.setContentAreaFilled(false);
-		btnStop.setBorderPainted(true);
+		btnStop.setBorderPainted(false);
 		btnStop.setFocusable(false);
-		btnStop.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnStop.setBorder(new RoundedBorder(50));
+
 		
 		btnStop.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnStop.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnStop.setBorder(new RoundedBorder(50));
 	            	btnStop.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnStop.setBorderPainted(false); // 테두리 안보이게
 	            }
 	        }
 	    });
-		j1.add(btnStop);
+		la.j1.add(btnStop);
 		
 		// 음악 재생
-		btnPlay.setBounds(1263, 55, 70, 70);
+		btnPlay.setBounds(1265, 59, 68, 68);
 		btnPlay.setOpaque(false);
 		btnPlay.setContentAreaFilled(false);
-		btnPlay.setBorderPainted(true);
+		btnPlay.setBorderPainted(false);
 		btnPlay.setFocusable(false);
-		btnPlay.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnPlay.setBorder(new RoundedBorder(50));
 		
 		btnPlay.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnPlay.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnPlay.setBorder(new RoundedBorder(50));
 	            	btnPlay.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnPlay.setBorderPainted(false); // 테두리 안보이게
 	            }
 	        }
 	    });
-		j1.add(btnPlay);
+		la.j1.add(btnPlay);
 		
 		// 음악 정지
-		btnPause.setBounds(1345, 55, 70, 70);
+		btnPause.setBounds(1345, 59, 68, 68);
 		btnPause.setOpaque(false);
 		btnPause.setContentAreaFilled(false);
-		btnPause.setBorderPainted(true);
+		btnPause.setBorderPainted(false);
 		btnPause.setFocusable(false);
-    	btnPause.setBorder(new LineBorder(new Color(255, 231, 110)));
+    	btnPause.setBorder(new RoundedBorder(50));
 		
 		btnPause.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnPause.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnPause.setBorder(new RoundedBorder(50));
 	            	btnPause.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnPause.setBorderPainted(false); // 테두리 안보이게
 	            }
 	        }
 	    });
-		j1.add(btnPause);
+		la.j1.add(btnPause);
 		
 		Container c = getContentPane();
 		c.setFocusable(true);
@@ -291,18 +305,27 @@ public class StartAction extends JFrame implements ActionListener {
 			}
 		});
 	}
-
-	public void showMusic(JLabel j1, JLabel j2) {
+	
+	public void test(int musicNum) {
+		this.musicNum = musicNum;
+		//System.out.println("test " + musicNum);
+		showMusic(la.j1, la.j2, la.j3);
+	}
+	public void showMusic(JLabel j1, JLabel j2, JLabel j3) {
 		// 악보 띄우기
 		ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
-		JLabel Jl_mu = new JLabel(musicImg);
-		Jl_mu.setBounds(0, 189, 1600, 219);
-		add(Jl_mu);
-		setLayout(null);
-		setVisible(true);
-
+		//System.out.println("musicn  " + path+music[musicName][musicNum]);
 		
-		//System.out.println(music[musicName][0]);
+		j3.setIcon(musicImg);
+		j3.setSize(1600, 219);
+		j3.setBounds(0, 189, 1600, 219);
+		System.out.println(j3.getIcon());
+		System.out.println(j3);
+		add(j3);
+		//j3.setBounds(0, 189, 1600, 219);
+		
+		
+		
 		title.setText(music[musicName][0]);
 		title.setBounds(180, 35, 200, 100);
 		title.setFont(new Font("SansSerif", Font.BOLD, 35));
@@ -315,7 +338,19 @@ public class StartAction extends JFrame implements ActionListener {
 		j2.setIcon(piano_2);
 		j2.setBounds(0, 373, 1600, 493);
 		check_music = 0;
+		
 	}
 	
 }
 
+class Label{
+	ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/start_menu.png");
+	JLabel j1 = new JLabel(menu);
+	
+	ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
+	JLabel j2 = new JLabel(piano_1);
+	
+	ImageIcon musicImg = new ImageIcon("../HaNaPiano/src/music/곰세마리_1");
+	JLabel j3 = new JLabel(musicImg); 
+	
+}
