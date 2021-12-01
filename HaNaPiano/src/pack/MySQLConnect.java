@@ -15,7 +15,7 @@ public class MySQLConnect {
 			System.out.println("DB 연결 드라이브가 없음");
 		}
 		
-		String url = "jdbc:mysql: //127.0.0.1:3306/hanapiano_db";
+		String url = "jdbc:mysql://127.0.0.1:3306/hanapiano_db";
 		String id = "root";
 		String pw = "mirim";
 		
@@ -159,4 +159,3 @@ public class MySQLConnect {
 		}
 	}
 }
-

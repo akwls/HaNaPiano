@@ -36,8 +36,6 @@ public class LoginAction extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);//창이 가운데 나오게
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//JFrame이 정상적으로 종료되게
 		
-		
-		
 	}
 
 	@Override
