@@ -317,14 +317,11 @@ public class StartAction extends JFrame implements ActionListener {
 		//System.out.println("musicn  " + path+music[musicName][musicNum]);
 		
 		j3.setIcon(musicImg);
-		j3.setSize(1600, 219);
 		j3.setBounds(0, 189, 1600, 219);
 		System.out.println(j3.getIcon());
+		j3.setSize(1600, 219);
 		System.out.println(j3);
 		add(j3);
-		//j3.setBounds(0, 189, 1600, 219);
-		
-		
 		
 		title.setText(music[musicName][0]);
 		title.setBounds(180, 35, 200, 100);
@@ -350,7 +347,6 @@ class Label{
 	ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
 	JLabel j2 = new JLabel(piano_1);
 	
-	ImageIcon musicImg = new ImageIcon("../HaNaPiano/src/music/°õ¼¼¸¶¸®_1");
-	JLabel j3 = new JLabel(musicImg); 
+	JLabel j3 = new JLabel(); 
 	
 }
