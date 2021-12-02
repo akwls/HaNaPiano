@@ -22,16 +22,14 @@ import javax.swing.event.ChangeListener;
 
 public class Login implements ActionListener {
 	
-	// public JFrame frame;
-	JFrame jframe;
-	JFrame frame;
-	public static JTextField text_Id;
-	public static JTextField text_Pwd;
+	JFrame jframe; // 자기 자신 창
+	JFrame frame; // 호출 전 창. 없애는 용도
+	public static JTextField text_Id; // 아이디 입력
+	public static JTextField text_Pwd; // 비밀번호 입력
 
 	public Login(JFrame frame) {
 		System.out.println("Login.java 실행");
-		jframe = new JFrame("하나피아노");
-		// 디비 연결 클래스 생성
+		jframe = new JFrame("하나피아노"); // 새로운 창 생성
 		this.frame = frame;
 		jframe.setLayout(new FlowLayout());
 		jframe.setSize(1600,900);//프레임의 크기
@@ -43,8 +41,8 @@ public class Login implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(frame != null) frame.setVisible(false);
-		jframe.setVisible(true);
+		if(frame != null) frame.setVisible(false); // 이전 창 없애기
+		jframe.setVisible(true); // 자기 자신 띄우기
 		LoginFrame();
 	}
 	
@@ -56,6 +54,7 @@ public class Login implements ActionListener {
 		jframe.setLayout(null);
 		jframe.setVisible(true);
 		
+		// 아이디, 비밀번호 입력 JTextField 생성
 		text_Id = new JTextField() {
 			/**
 			 * 
@@ -74,6 +73,7 @@ public class Login implements ActionListener {
 			@Override public void setBorder(Border border) {
 		    }
 		};
+		
 		JButton btnLogin = new JButton();
 		JButton btnJoin = new JButton();
 		
@@ -134,12 +134,7 @@ public class Login implements ActionListener {
 		jframe.add(jl);
 		Container cc = jframe.getContentPane();
 		cc.setFocusable(true);
-		text_Id.requestFocus();
-		// String id = text_Id.getText();
-		text_Pwd.requestFocus();
-		// String pw = text_Pwd.getText(); 
-		// System.out.println("아이디 : " + text_Id.getText() +", 비밀번호 : " + pw);
-		// String pw = Arrays.toString(password);
+		text_Id.requestFocus();		
 		btnJoin.addActionListener(new Join(jframe));
 		btnLogin.addActionListener(new LoginAction(jframe));
 		

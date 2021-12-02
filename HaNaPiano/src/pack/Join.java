@@ -16,14 +16,14 @@ import javax.swing.event.ChangeListener;
 
 public class Join implements ActionListener{
 	
-	public JFrame frame;
-	JFrame jframe;
+	public JFrame frame; // 이전 창. 없애는 용도
+	JFrame jframe; // 자기 자신 새 창.
 	public static JTextField text_Id, text_Pwd, text_PwdCheck, text_Name;
+	// 아이디, 비밀번호, 비밀번호 확인, 이름 입력 JTextField
 
 	public Join(JFrame frame) {
 		System.out.println("Join.java 실행");
-		// 디비 연결 클래스 생성
-		jframe = new JFrame("하나피아노");
+		jframe = new JFrame("하나피아노"); // 새창 만들기
 		this.frame = frame;
 		jframe.setLayout(new FlowLayout());
 		jframe.setSize(1600,900);//프레임의 크기
@@ -35,8 +35,8 @@ public class Join implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		frame.setVisible(false);
-		jframe.setVisible(true);
+		frame.setVisible(false); // 이전 창 없애기
+		jframe.setVisible(true); // 새 창 띄우기
 		JoinFrame();
 	}
 	

@@ -6,9 +6,9 @@ public class MySQLConnect {
 	public MySQLConnect() {
 		// 생성자
 	}
+	// 연결 메소드
 	public void connect() {
 		try {
-			// Class.forName("org.git.mm.mysql.Driver");// 1. jdbc 드라이브 연결
 			Class.forName("com.mysql.cj.jdbc.Driver"); // 로 변경이 됨
 			System.out.println("드라이브 연결이 잘됨");
 		} catch(ClassNotFoundException ee) {
@@ -33,12 +33,14 @@ public class MySQLConnect {
 		}
 		
 	}
+	
+	// 로그인
 	int login(String id, String pw) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
 		try {
-			String sql = "select * from user where id = ?";
+			String sql = "select * from user where id = ?"; // 아이디 존재 여부 체크
 			stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE);
 			stmt.setString(1, id);
@@ -52,7 +54,7 @@ public class MySQLConnect {
 			}
 			else {
 				cnt = 0;
-				sql = "select * from user where id = ? and pw = ?";
+				sql = "select * from user where id = ? and pw = ?"; // 비밀번호 확인
 				stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE);
 				stmt.setString(1, id);
@@ -76,7 +78,7 @@ public class MySQLConnect {
 		return 0;
 	}
 	
-	
+	// 닫기
 	void closing() {
 		try {
 			// rs.close();
@@ -86,13 +88,13 @@ public class MySQLConnect {
 		}
 	}
 	
-	
+	// 회원가입
 	int join(String id, String pw, String name) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
 		try {
-			String sql = "select * from user where id = ?";
+			String sql = "select * from user where id = ?"; // 아이디 중복 체크
 			stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE);
 			stmt.setString(1, id);
@@ -109,7 +111,7 @@ public class MySQLConnect {
 			}
 			else {
 				cnt = 0;
-				sql = "insert into user (id, pw, name) values(?, ?, ?)";
+				sql = "insert into user (id, pw, name) values(?, ?, ?)"; // insert
 				stmt = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE);
 				stmt.setString(1, id);
@@ -124,6 +126,8 @@ public class MySQLConnect {
 		return 0;
 	}
 	
+	
+	// 사용자 녹음 개수 가져오기
 	public int getRecordCnt(String id) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -142,6 +146,8 @@ public class MySQLConnect {
 		}
 		return result;
 	}
+	
+	// 사용자 녹음 개수 update
 	public void setRecordCnt(String id, int cnt) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

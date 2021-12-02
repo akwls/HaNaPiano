@@ -19,16 +19,15 @@ import javax.swing.event.ChangeListener;
 
 public class LoginAction extends JFrame implements ActionListener {
 	
-	public JFrame frame;
-	String id, pw;
-	Toast toast = null;
-	public Thread th= null;
-	int recordCnt;
+	public JFrame frame; // 이전 창. 없애는 용도
+	String id, pw; // JTextField에서 가져올 아이디, 비밀번호 변수
+	Toast toast = null; // 토스트 클래스 변수
+	public Thread th= null; // 녹음 재생을 위한 스레드
+	int recordCnt; // 사용자가 지금까지 녹음한 갯수
 	
 	public LoginAction(JFrame frame) {
 		// 디비 연결 클래스 생성
 		super("하나피아노");
-		
 		this.frame = frame;
 		setLayout(new FlowLayout());
 		setSize(1600,900);//프레임의 크기
@@ -41,15 +40,16 @@ public class LoginAction extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		this.id = Login.text_Id.getText();
-		this.pw = Login.text_Pwd.getText();
-		System.out.println("아이디 : " + this.id+", 비밀번호 : " + this.pw);
-		int code = processLogin();
-		toast.showtoast();
+		this.id = Login.text_Id.getText(); // 아이디 가져오기
+		this.pw = Login.text_Pwd.getText(); // 비밀번호 가져오기
+		// System.out.println("아이디 : " + this.id+", 비밀번호 : " + this.pw);
+		int code = processLogin(); // 로그인 후 실행 결과 코드 가져오기
+		toast.showtoast(); // 토스트 띄우기
+		// 로그인이 성공적으로 완료되면
 		if(code == 2) {
-			frame.setVisible(false);
-			setVisible(true);
-			Start_Screen();
+			frame.setVisible(false); // 이전 창 없애기
+			setVisible(true); // 현재 창 띄우기
+			Start_Screen(); // 창 구성하는 메소드
 		}
 	}
 
@@ -251,8 +251,9 @@ public class LoginAction extends JFrame implements ActionListener {
 		Container c = getContentPane();
 		c.setFocusable(true);
 		c.requestFocus();
+		// 키 입력 받기
 		
-		KeyListener playPiano = new KeyListener();
+		KeyListener playPiano = new KeyListener(); // 키 리스너 객체 생성
 		c.addKeyListener(playPiano);
 		
 		btnRecoding.addActionListener(new ActionListener() {
@@ -260,9 +261,10 @@ public class LoginAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				KeyListener.recording = true;
-				KeyListener.recordKey.clear();
-				KeyListener.keySecond = System.currentTimeMillis();
+				KeyListener.recording = true; // 녹음 중 변수 true
+				KeyListener.recordKey.clear(); // 녹음 키 리스트 비우기
+				KeyListener.recordTime.clear(); // 녹음 시간 리스트 비우기
+				KeyListener.keySecond = System.currentTimeMillis(); // 현재 시간 표시
 			}
 			
 		});
@@ -277,12 +279,12 @@ public class LoginAction extends JFrame implements ActionListener {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						KeyListener.recordPlay();
+						KeyListener.recordPlay(); // 스레드로 녹음 재생
 					}
 				});
 				th.start();
-				recordCnt = Main.mysql.getRecordCnt(id);
-				Main.mysql.setRecordCnt(id, recordCnt+1);
+				recordCnt = Main.mysql.getRecordCnt(id); // 녹음 갯수 가져오기
+				Main.mysql.setRecordCnt(id, recordCnt+1); // 녹음 갯수 + 1 데이터베이스에 넣기
 			}
 		});
 		
@@ -291,9 +293,9 @@ public class LoginAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				KeyListener.recording = false;
-				RecordFile recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id);
-				recordfile.recordFile();
+				KeyListener.recording = false; // 녹음 중 변수 false
+				RecordFile recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id); // 녹음 파일입출력 객체
+				recordfile.recordFile(); // 파일입출력 실행
 				
 			}
 		});
@@ -303,15 +305,14 @@ public class LoginAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				KeyListener.playing = false;
+				KeyListener.playing = false; // 연주 중 변수 false
 				
 			}
 		});
 		
 	}
 	public int processLogin() {
-		int loginCode = Main.mysql.login(this.id, this.pw);
-		
+		int loginCode = Main.mysql.login(this.id, this.pw); // MySQL 클래스 변수를 통해 로그인하고 결과 코드 가져오기
 		String s = "";
 		if(loginCode == 1) {
 			s = "아이디가 존재하지 않습니다.";
@@ -325,6 +326,7 @@ public class LoginAction extends JFrame implements ActionListener {
 			s = "비밀번호가 일치하지 않습니다."; 
 			toast = new Toast(s, 800, 700);
 		}
+		// 로그인 결과에 따라 토스트 변수 생성
 		return loginCode;
 		
 	}

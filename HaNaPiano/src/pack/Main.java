@@ -18,8 +18,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Main {
-	// ImageIcon icon = new ImageIcon(Main.class.getResource("../image/start.png"));
-	// static Graphics background = icon.getImage();
+	// MySQL 객체 생성
+	// 모든 클래스에서 사용하는 변수
 	public static MySQLConnect mysql = new MySQLConnect();
 
 	public static void main(String[] args) throws Exception {
@@ -39,18 +39,14 @@ public class Main {
 		frame.add(jl);
 		frame.setLayout(null);
 		frame.setVisible(true);
-		mysql.connect();
+		mysql.connect(); // 시간 지연 발생
 		
-		// 2초 후 버튼 화면 띄우기
 		ImageIcon iii = new ImageIcon("../HaNaPiano/src/image/login_start.png");
 		jl.setIcon(iii);
 		
 		// 로그인, 바로 시작 버튼 만들기
 		JButton btnLogin = new JButton();
 		JButton btnStart = new JButton();
-		
-		
-		// LineBorder roundedLineBorder = new LineBorder(Color.black, 195, true);
 		
 		// 로그인 버튼
 		btnLogin.setBounds(529, 185, 542, 207); // 좌표, 가로, 세로 설정
