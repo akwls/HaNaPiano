@@ -15,12 +15,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
+import javax.annotation.Resource;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
@@ -33,7 +37,6 @@ public class StartAction extends JFrame implements ActionListener {
 	public Thread th= null;
 	public int check_music = 1;
 	public MusicListener mu;
-	public JLabel Jl_mu = new JLabel();
 	public Label la = new Label();
 	
 	JLabel title = new JLabel(); // °î ÀÌ¸§
@@ -85,9 +88,9 @@ public class StartAction extends JFrame implements ActionListener {
 		this.setLayout(null);
 		this.setVisible(true);
 		
-		la.j3.setSize(1600, 219);
-		la.j3.setBounds(0, 189, 1600, 219);
-		this.add(la.j3);
+		la.p1.setBounds(0, 189, 1600, 219);
+		la.p1.setSize(1600, 219);
+		this.add(la.p1);
 		this.setLayout(null);
 		this.setVisible(true);
 		
@@ -128,7 +131,7 @@ public class StartAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(check_music == 1) { // ¾Çº¸º¸±â
-					showMusic(la.j1, la.j2, la.j3);					
+					showMusic(la.j1, la.j2, la.p1);					
 										
 				}else {
 					la.j2.setIcon(la.piano_1);
@@ -338,19 +341,30 @@ public class StartAction extends JFrame implements ActionListener {
 	public void test(int musicNum) {
 		this.musicNum = musicNum;
 		//System.out.println("test " + musicNum);
-		showMusic(la.j1, la.j2, la.j3);
+		//la.p1.setIcon(null);
+		showMusic(la.j1, la.j2, la.p1);
 	}
-	public void showMusic(JLabel j1, JLabel j2, JLabel j3) {
-		// ¾Çº¸ ¶ç¿ì±â
+	public void showMusic(JLabel j1, JLabel j2, JPanel p1) {
+		// ¾Çº¸ ¶ç¿ì±â		
 		ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+		Image musicimg = musicImg.getImage();
+		
 		//System.out.println("musicn  " + path+music[musicName][musicNum]);
 		
-		j3.setIcon(musicImg);
-		j3.setBounds(0, 189, 1600, 219);
-		System.out.println(j3.getIcon());
-		j3.setSize(1600, 219);
-		System.out.println(j3);
-		add(j3);
+		//j3.setIcon(new ImageIcon(path+music[musicName][musicNum]));
+		//j3.revalidate();
+		//j3.repaint();
+		//j3.update(j3.getGraphics());
+		//j3.setIcon(musicImg);
+		//j3.setText(path+music[musicName][musicNum]);
+		//System.out.println(j3.getIcon());
+		
+		//add(j3);
+		
+		//j3.updateUI();
+		
+		p1.imageUpdate(musicimg, 0, 0, 189, 1600, 219);
+		
 		
 		title.setText(music[musicName][0]);
 		title.setBounds(180, 35, 200, 100);
@@ -375,7 +389,6 @@ class Label{
 	
 	ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
 	JLabel j2 = new JLabel(piano_1);
-	
-	JLabel j3 = new JLabel(); 
-	
+		
+	JPanel p1 = new JPanel();
 }

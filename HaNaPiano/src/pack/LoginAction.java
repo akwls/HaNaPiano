@@ -1,9 +1,11 @@
 package pack;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -24,13 +28,17 @@ public class LoginAction extends JFrame implements ActionListener {
 	Toast toast = null;
 	public Thread th= null;
 	int recordCnt;
+	public MusicList mu = new MusicList();
+	int recordIndex;
+
+	public Container c = getContentPane();
 	
 	public LoginAction(JFrame frame) {
 		// 디비 연결 클래스 생성
 		super("하나피아노");
 		
 		this.frame = frame;
-		setLayout(new FlowLayout());
+	//	setLayout(new CardLayout());
 		setSize(1600,900);//프레임의 크기
 		setResizable(false);//창의 크기를 변경하지 못하게
 		setLocationRelativeTo(null);//창이 가운데 나오게
@@ -60,6 +68,7 @@ public class LoginAction extends JFrame implements ActionListener {
 		this.add(jl);
 		this.setLayout(null);
 		this.setVisible(true);
+		
 		
 		JButton btnMusic = new JButton();
 		JButton btnUp = new JButton();
@@ -246,6 +255,10 @@ public class LoginAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
+		
+		btnUser.addActionListener(new MusicList(id));
+		recordIndex = mu.getList();
+		
 		jl.add(btnUser);
 		
 		Container c = getContentPane();
