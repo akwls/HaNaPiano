@@ -148,19 +148,19 @@ public class LoginAction extends JFrame implements ActionListener {
 		jl.add(btnDawn);
 		
 		// 녹음하기
-		btnRecoding.setBounds(1103, 55, 70, 70);
+		btnRecoding.setBounds(1105, 56, 68, 68);
 		btnRecoding.setOpaque(false);
 		btnRecoding.setContentAreaFilled(false);
-		btnRecoding.setBorderPainted(true);
+		btnRecoding.setBorderPainted(false);
 		btnRecoding.setFocusable(false);
-		btnRecoding.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnRecoding.setBorder(new RoundedBorder(50));
 
 		btnRecoding.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnRecoding.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnRecoding.setBorder(new RoundedBorder(50));
 	            	btnRecoding.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnRecoding.setBorderPainted(false); // 테두리 안보이게
@@ -170,19 +170,19 @@ public class LoginAction extends JFrame implements ActionListener {
 		jl.add(btnRecoding);
 		
 		// 녹음 멈추기
-		btnStop.setBounds(1185, 55, 70, 70);
+		btnStop.setBounds(1185, 56, 68, 68);
 		btnStop.setOpaque(false);
 		btnStop.setContentAreaFilled(false);
-		btnStop.setBorderPainted(true);
+		btnStop.setBorderPainted(false);
 		btnStop.setFocusable(false);
-		btnStop.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnStop.setBorder(new RoundedBorder(50));
 		
 		btnStop.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnStop.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnStop.setBorder(new RoundedBorder(50));
 	            	btnStop.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnStop.setBorderPainted(false); // 테두리 안보이게
@@ -192,19 +192,19 @@ public class LoginAction extends JFrame implements ActionListener {
 		jl.add(btnStop);
 		
 		// 음악 재생
-		btnPlay.setBounds(1263, 55, 70, 70);
+		btnPlay.setBounds(1265, 56, 68, 68);
 		btnPlay.setOpaque(false);
 		btnPlay.setContentAreaFilled(false);
-		btnPlay.setBorderPainted(true);
+		btnPlay.setBorderPainted(false);
 		btnPlay.setFocusable(false);
-		btnPlay.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnPlay.setBorder(new RoundedBorder(50));
 		
 		btnPlay.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnPlay.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnPlay.setBorder(new RoundedBorder(50));
 	            	btnPlay.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnPlay.setBorderPainted(false); // 테두리 안보이게
@@ -214,19 +214,19 @@ public class LoginAction extends JFrame implements ActionListener {
 		jl.add(btnPlay);
 		
 		// 음악 정지
-		btnPause.setBounds(1345, 55, 70, 70);
+		btnPause.setBounds(1345, 56, 68, 68);
 		btnPause.setOpaque(false);
 		btnPause.setContentAreaFilled(false);
-		btnPause.setBorderPainted(true);
+		btnPause.setBorderPainted(false);
 		btnPause.setFocusable(false);
-		btnPause.setBorder(new LineBorder(new Color(255, 231, 110)));
+		btnPause.setBorder(new RoundedBorder(50));
 		
 		btnPause.getModel().addChangeListener(new ChangeListener() {
 	        @Override
 	        public void stateChanged(ChangeEvent e) {
 	            ButtonModel model = (ButtonModel) e.getSource();
 	            if (model.isRollover()) {
-	            	btnPause.setBorder(new LineBorder(new Color(112, 112, 112)));
+	            	btnPause.setBorder(new RoundedBorder(50));
 	            	btnPause.setBorderPainted(true); // 테두리 보이게
 	            } else {
 	            	btnPause.setBorderPainted(false); // 테두리 안보이게

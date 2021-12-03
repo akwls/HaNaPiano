@@ -20,7 +20,7 @@ public class MusicList implements ActionListener{
 	public int recordCnt;
 	public DefaultListModel model = new DefaultListModel();
 	public JList MList = new JList(model);
-	public int index = 3;
+	public int index;
 	
 	public MusicList() {}
 	
