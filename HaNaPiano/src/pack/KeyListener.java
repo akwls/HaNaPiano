@@ -92,4 +92,22 @@ public class KeyListener extends KeyAdapter {
 		}
 		
 	}
+	public static void recordPlay(String[] recordKey, String[] recordTime) { // int, long
+		AudioInputStream stream;
+		try {
+			for(int i=0; i<recordKey.length; i++) {
+				// if(!playing) return; // 연주 중 변수가 false면 break
+				Thread.sleep(Long.parseLong(recordTime[i])); // 지연시간 리스트의 i번째 방만큼 지연하기
+				stream = AudioSystem.getAudioInputStream(sounds.get(Integer.parseInt(recordKey[i]))); // 눌린 키 리스트에 해당하는 오디오 파일
+				Clip clip = AudioSystem.getClip();
+	            clip.open(stream);
+	            clip.start();
+	            
+			}
+		}
+		catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace(); 
+		}
+	}
 }

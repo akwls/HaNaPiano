@@ -1,9 +1,11 @@
 package pack;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -24,12 +28,17 @@ public class LoginAction extends JFrame implements ActionListener {
 	Toast toast = null; // 토스트 클래스 변수
 	public Thread th= null; // 녹음 재생을 위한 스레드
 	int recordCnt; // 사용자가 지금까지 녹음한 갯수
+	public MusicList mu = new MusicList();
+	int recordIndex;
+	public static RecordFile recordfile = null;
+
+	public Container c = getContentPane();
 	
 	public LoginAction(JFrame frame) {
 		// 디비 연결 클래스 생성
 		super("하나피아노");
 		this.frame = frame;
-		setLayout(new FlowLayout());
+	//	setLayout(new CardLayout());
 		setSize(1600,900);//프레임의 크기
 		setResizable(false);//창의 크기를 변경하지 못하게
 		setLocationRelativeTo(null);//창이 가운데 나오게
@@ -42,7 +51,7 @@ public class LoginAction extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		this.id = Login.text_Id.getText(); // 아이디 가져오기
 		this.pw = Login.text_Pwd.getText(); // 비밀번호 가져오기
-		// System.out.println("아이디 : " + this.id+", 비밀번호 : " + this.pw);
+		System.out.println("아이디 : " + this.id+", 비밀번호 : " + this.pw);
 		int code = processLogin(); // 로그인 후 실행 결과 코드 가져오기
 		toast.showtoast(); // 토스트 띄우기
 		// 로그인이 성공적으로 완료되면
@@ -60,6 +69,7 @@ public class LoginAction extends JFrame implements ActionListener {
 		this.add(jl);
 		this.setLayout(null);
 		this.setVisible(true);
+		recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id); // 녹음 파일입출력 객체
 		
 		JButton btnMusic = new JButton();
 		JButton btnUp = new JButton();
@@ -246,6 +256,10 @@ public class LoginAction extends JFrame implements ActionListener {
 	            }
 	        }
 	    });
+		
+		btnUser.addActionListener(new MusicList(id));
+		// recordIndex = mu.getList();
+		
 		jl.add(btnUser);
 		
 		Container c = getContentPane();
@@ -256,6 +270,7 @@ public class LoginAction extends JFrame implements ActionListener {
 		KeyListener playPiano = new KeyListener(); // 키 리스너 객체 생성
 		c.addKeyListener(playPiano);
 		
+		// 녹음 시작
 		btnRecoding.addActionListener(new ActionListener() {
 
 			@Override
@@ -265,10 +280,12 @@ public class LoginAction extends JFrame implements ActionListener {
 				KeyListener.recordKey.clear(); // 녹음 키 리스트 비우기
 				KeyListener.recordTime.clear(); // 녹음 시간 리스트 비우기
 				KeyListener.keySecond = System.currentTimeMillis(); // 현재 시간 표시
+				
 			}
 			
 		});
 		
+		// 녹음 재생
 		btnPlay.addActionListener(new ActionListener() {
 			
 			@Override
@@ -283,23 +300,25 @@ public class LoginAction extends JFrame implements ActionListener {
 					}
 				});
 				th.start();
-				recordCnt = Main.mysql.getRecordCnt(id); // 녹음 갯수 가져오기
-				Main.mysql.setRecordCnt(id, recordCnt+1); // 녹음 갯수 + 1 데이터베이스에 넣기
+				
 			}
 		});
 		
+		// 녹음 중지
 		btnStop.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				KeyListener.recording = false; // 녹음 중 변수 false
-				RecordFile recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id); // 녹음 파일입출력 객체
 				recordfile.recordFile(); // 파일입출력 실행
+				recordCnt = Main.mysql.getRecordCnt(id); // 녹음 갯수 가져오기
+				Main.mysql.setRecordCnt(id, recordCnt+1); // 녹음 갯수 + 1 데이터베이스에 넣기
 				
 			}
 		});
 		
+		// 재생 정지
 		btnPause.addActionListener(new ActionListener() {
 			
 			@Override

@@ -16,8 +16,8 @@ import javax.swing.event.ChangeListener;
 
 public class Join implements ActionListener{
 	
-	public JFrame frame; // 이전 창. 없애는 용도
-	JFrame jframe; // 자기 자신 새 창.
+	public JFrame frame;
+	JFrame jframe;
 	public static JTextField text_Id, text_Pwd, text_PwdCheck, text_Name;
 	// 아이디, 비밀번호, 비밀번호 확인, 이름 입력 JTextField
 
