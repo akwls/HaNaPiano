@@ -41,7 +41,10 @@ public class MusicList implements ActionListener{
 		frame.setVisible(true);
 		
 		Button showBtn = new Button("∞Ó º±≈√");
-		showBtn.setBounds(120, 800, 50, 50);
+		Button CancelBtn = new Button("√Îº“");
+		showBtn.setBounds(110, 800, 80, 80);
+		showBtn.setFocusable(false);
+		CancelBtn.setBounds(115, 800, 80, 80);
 		
 		showBtn.addActionListener(new ActionListener() {
 			
@@ -55,8 +58,21 @@ public class MusicList implements ActionListener{
 				frame.dispose();
 			}
 		});
+		
+		CancelBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				frame.remove(MList);
+				frame.remove(showBtn);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
 
 		frame.add(showBtn);
+		frame.add(CancelBtn);
 		
 		MList.setFixedCellWidth(300);
 		MList.setFixedCellHeight(50);
