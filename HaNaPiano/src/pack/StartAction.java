@@ -445,6 +445,8 @@ public class StartAction extends JFrame implements ActionListener {
 				if(musicNum < music[musicName].length) {
 					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
+				}else {
+					musicNum = music[musicName].length - 1;
 				}
 				
 			}
@@ -457,6 +459,8 @@ public class StartAction extends JFrame implements ActionListener {
 				if(musicNum > 0) {
 					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
+				}else {
+					musicNum = 1;
 				}
 			}
 		});
