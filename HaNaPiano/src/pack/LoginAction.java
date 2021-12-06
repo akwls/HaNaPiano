@@ -32,6 +32,7 @@ public class LoginAction extends JFrame implements ActionListener {
 	public MusicList mu = new MusicList();
 	int recordIndex;
 	public static RecordFile recordfile = null;
+	public int OctNum = 4;
 
 	public Container c = getContentPane();
 	
@@ -97,6 +98,14 @@ public class LoginAction extends JFrame implements ActionListener {
 		this.add(imageLabel);
 		imageLabel.setLayout(new FlowLayout());
 		this.setVisible(true);
+		
+		JLabel octave = new JLabel();
+		octave.setText("ø¡≈∏∫Í "+OctNum);
+		octave.setBounds(728, 44, 300, 100);
+		octave.setFont(new Font("SansSerif", Font.BOLD, 35));
+		la.j1.add(octave);
+		la.j1.setLayout(null);
+		octave.setVisible(true);	
 		
 		
 		JButton btnMusic = new JButton();
@@ -175,6 +184,20 @@ public class LoginAction extends JFrame implements ActionListener {
 		
 		la.j1.add(btnUp);
 		
+		btnUp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(OctNum < 5) {
+					OctNum++;
+					KeyListener.octNum++;
+					octave.setText("ø¡≈∏∫Í "+OctNum);
+					la.j1.add(octave);
+					la.j1.setLayout(null);
+					octave.setVisible(true);
+				}
+			}
+		});
+		
 		// ø¡≈∏∫Í ≥ª∏Æ±‚
 		btnDawn.setBounds(918, 70, 50, 50);
 		btnDawn.setOpaque(false);
@@ -196,6 +219,20 @@ public class LoginAction extends JFrame implements ActionListener {
 	        }
 	    });
 		la.j1.add(btnDawn);
+		
+		btnDawn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(OctNum > 3) {
+					OctNum--;
+					KeyListener.octNum--;
+					octave.setText("ø¡≈∏∫Í "+OctNum);
+					la.j1.add(octave);
+					la.j1.setLayout(null);
+					octave.setVisible(true);
+				}
+			}
+		});
 		
 		// ≥Ï¿Ω«œ±‚
 		btnRecoding.setBounds(1105, 59, 68, 68);
@@ -474,6 +511,8 @@ public class LoginAction extends JFrame implements ActionListener {
 				if(musicNum < music[musicName].length) {
 					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
+				}else {
+					musicNum = music[musicName].length - 1;
 				}
 				
 			}
@@ -486,6 +525,8 @@ public class LoginAction extends JFrame implements ActionListener {
 				if(musicNum > 0) {
 					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
+				}else {
+					musicNum = 1;
 				}
 			}
 		});
