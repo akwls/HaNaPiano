@@ -91,7 +91,7 @@ public class Login implements ActionListener {
 		jl.add(text_Pwd);
 		
 		// 로그인하기
-		btnLogin.setBounds(842, 595, 270, 100);
+		btnLogin.setBounds(840, 595, 273, 103);
 		btnLogin.setOpaque(false);
 		btnLogin.setContentAreaFilled(false);
 		btnLogin.setBorderPainted(false);
@@ -112,7 +112,7 @@ public class Login implements ActionListener {
 		jl.add(btnLogin);
 		
 		// 회원가입 하기
-		btnJoin.setBounds(511, 595, 270, 100);
+		btnJoin.setBounds(509, 595, 273, 103);
 		btnJoin.setOpaque(false);
 		btnJoin.setContentAreaFilled(false);
 		btnJoin.setBorderPainted(false);
