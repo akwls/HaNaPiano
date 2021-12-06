@@ -181,8 +181,8 @@ public class StartAction extends JFrame implements ActionListener {
 		btnUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(OctNum < 5) {
-					OctNum++;
+				if(OctNum > 3) {
+					OctNum--;
 					KeyListener.octNum++;
 					octave.setText("¿ÁÅ¸ºê "+OctNum);
 					la.j1.add(octave);
@@ -217,8 +217,8 @@ public class StartAction extends JFrame implements ActionListener {
 		btnDawn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(OctNum > 3) {
-					OctNum--;
+				if(OctNum < 5) {
+					OctNum++;
 					KeyListener.octNum--;
 					octave.setText("¿ÁÅ¸ºê "+OctNum);
 					la.j1.add(octave);
