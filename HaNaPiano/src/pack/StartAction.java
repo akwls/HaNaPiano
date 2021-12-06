@@ -49,12 +49,6 @@ public class StartAction extends JFrame implements ActionListener {
 	public int OctNum = 4;
 	
 	JLabel title = new JLabel(); // 곡 이름
-	String[][] music = {
-			{"곰세마리", "곰세마리_1.png", "곰세마리_2.png", "곰세마리_3.png"},
-			{"과수원길", "과수원길_1.png", "과수원길_2.png", "과수원길_3.png", "과수원길_4.png", "과수원길_5.png"},
-			{"도레미송", "도레미송_1.png", "도레미송_2.png", "도레미송_3.png", "도레미송_4.png"},
-			{"사과같은 내 얼굴", "사과같은_1.png", "사과같은_2.png"}				
-	};
 	String path = "../HaNaPiano/src/music/";
 	int musicName = 0, musicNum = 1;
 	
@@ -373,7 +367,7 @@ public class StartAction extends JFrame implements ActionListener {
 	}
 
 	public void showMusic(JLabel j1, JLabel j2) {
-		ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+		ImageIcon musicImg = new ImageIcon(path+MusicList.music[musicName][musicNum]);
 		imageLabel.setIcon(musicImg);		
 		
 		JButton back = new JButton();
@@ -444,11 +438,11 @@ public class StartAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				musicNum++;
-				if(musicNum < music[musicName].length) {
-					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+				if(musicNum < MusicList.music[musicName].length) {
+					ImageIcon musicImg = new ImageIcon(path+MusicList.music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
 				}else {
-					musicNum = music[musicName].length - 1;
+					musicNum = MusicList.music[musicName].length - 1;
 				}
 				
 			}
@@ -459,7 +453,7 @@ public class StartAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				musicNum--;
 				if(musicNum > 0) {
-					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					ImageIcon musicImg = new ImageIcon(path+MusicList.music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
 				}else {
 					musicNum = 1;
@@ -472,16 +466,16 @@ public class StartAction extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				musicName++;
 				musicNum = 1;
-				if(musicName < music.length) {
-					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+				if(musicName < MusicList.music.length) {
+					ImageIcon musicImg = new ImageIcon(path+MusicList.music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
-					title.setText(music[musicName][0]);
+					title.setText(MusicList.music[musicName][0]);
 				}else {
 					musicName = 0;
 					musicNum = 1;
-					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					ImageIcon musicImg = new ImageIcon(path+MusicList.music[musicName][musicNum]);
 					imageLabel.setIcon(musicImg);
-					title.setText(music[musicName][0]);
+					title.setText(MusicList.music[musicName][0]);
 				}
 			}
 		});
@@ -491,7 +485,7 @@ public class StartAction extends JFrame implements ActionListener {
 		j1.add(next);	
 		j1.add(select);
 		
-		title.setText(music[musicName][0]);
+		title.setText(MusicList.music[musicName][0]);
 		title.setBounds(180, 35, 300, 100);
 		title.setFont(new Font("SansSerif", Font.BOLD, 35));
 		j1.add(title);

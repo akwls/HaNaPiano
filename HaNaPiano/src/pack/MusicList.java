@@ -23,6 +23,14 @@ public class MusicList implements ActionListener{
 	public int index;
 	String id;
 	
+	public static String[][] music = {
+			{"곰세마리", "곰세마리_1.png", "곰세마리_2.png", "곰세마리_3.png"},
+			{"도레미송", "도레미송_1.png", "도레미송_2.png", "도레미송_3.png", "도레미송_4.png"},
+			{"사과같은 내 얼굴", "사과같은_1.png", "사과같은_2.png"},
+			{"엘리제를 위하여", "엘리제를 위하여_1.png", "엘리제를 위하여_2.png", "엘리제를 위하여_3.png", "엘리제를 위하여_4.png"},
+			{"캐논", "캐논_1.png", "캐논_2.png", "캐논_3.png", "캐논_4.png"}
+	};
+	
 	public MusicList() {}
 	
 	public MusicList(String id) {
