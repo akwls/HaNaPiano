@@ -19,11 +19,11 @@ public class KeyListener extends KeyAdapter {
 	// 오디오 파일 arrayList
 	public static ArrayList<ArrayList<File>> sounds = new ArrayList<ArrayList<File>>();
 	// 키 배열
-	Character[] keys_code = {'a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'k'};
+	Character[] keys_code = {'a', 'w', 's', 'e', 'd', 'f', 't', 'g', 'y', 'h', 'u', 'j', 'k', 'o', 'l', 'p', ';'};
 	// 키 배열로 arrayList 생성
 	ArrayList<Character> keys = new ArrayList<>(Arrays.asList(keys_code));
 	// 오디오 파일 이름
-	String[] sounds_path = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"};
+	String[] sounds_path = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C", "C#", "D", "D#", "E"};
 	// 오디오 파일 경로
 	String path = "../HaNaPiano/src/sound/";
 	// 녹음 - 누른 키 arrayList
@@ -42,20 +42,21 @@ public class KeyListener extends KeyAdapter {
 		for(int i=0; i<3; i++) {
 			sounds.add(new ArrayList<File>());
 			for(int j=0; j<sounds_path.length; j++) {
-				if(j != sounds_path.length-1) sounds.get(i).add(new File(path + sounds_path[j] + Integer.toString(i+3) + ".wav"));
-				else sounds.get(i).add(new File(path + sounds_path[j] + Integer.toString(i+4) + ".wav"));
+				if(j < 12) sounds.get(i).add(new File(path + sounds_path[j] + Integer.toString(i+3) + ".wav"));
+				else if(j >= 12 && octNum != 3)sounds.get(i).add(new File(path + sounds_path[j] + Integer.toString(i+4) + ".wav"));
 				// System.out.println(path + sounds_path[i] + Integer.toString(octNum) + ".mp3");
 				// 오디오 파일 생성하기
 			}
 		}
-		
+		sounds.get(2).add(new File(path + sounds_path[12] + Integer.toString(6) + ".wav"));
 	}
+	
 	
 	// 키가 눌렸을 때 피아노 음 재생하기
 	public void keyPressed(KeyEvent e) {
 		Container contentPane = (Container)e.getSource();
 		char c = e.getKeyChar();
-		if(keys.contains(c)) { // 눌린 키가 리스트에 있으면
+		if((keys.contains(c) && octNum != 5) || (keys.indexOf(c) > -1 && keys.indexOf(c) < 13)) { // 눌린 키가 리스트에 있으면
 			int i = keys.indexOf(c); // 눌린 키의 인덱스
 			AudioInputStream stream;
 			try {
