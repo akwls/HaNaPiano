@@ -1,5 +1,8 @@
 package pack;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -11,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.TextArea;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -31,27 +35,27 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.TextAction;
+import javax.swing.text.View;
+import javax.xml.ws.spi.Invoker;
 
 public class StartAction extends JFrame implements ActionListener {
 	public JFrame frame;
 	public Thread th= null;
 	public int check_music = 1;
-	public MusicListener mu;
 	public Label la = new Label();
+	
+	public JLabel imageLabel = new JLabel();
+	public int NameInd = 0;
 	
 	JLabel title = new JLabel(); // 곡 이름
 	String[][] music = {
-			{"곰세마리", "곰세마리_1.png", "곰세마리_2.png", "곰세마리_3.png"}
-						};
+			{"곰세마리", "곰세마리_1.png", "곰세마리_2.png", "곰세마리_3.png"},
+			{"과수원길", "과수원길_1.png", "과수원길_2.png", "과수원길_3.png", "과수원길_4.png", "과수원길_5.png"},
+			{"도레미송", "도레미송_1.png", "도레미송_2.png", "도레미송_3.png", "도레미송_4.png"},
+			{"사과같은 내 얼굴", "사과같은_1.png", "사과같은_2.png"}				
+	};
 	String path = "../HaNaPiano/src/music/";
 	int musicName = 0, musicNum = 1;
-
-	public StartAction() {}
-	
-	public StartAction(int musicNum) {
-		this.musicNum = musicNum;
-		System.out.println(musicNum);
-	}
 	
 	public StartAction(JFrame frame) {
 		super("하나피아노");
@@ -73,25 +77,21 @@ public class StartAction extends JFrame implements ActionListener {
 
 	
 	public void Start_Screen() {
-		//ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/start_menu.png");
-		//JLabel j1 = new JLabel(menu);
 		la.j1.setSize(1600, 188);
 		this.add(la.j1);
 		this.setLayout(null);
 		this.setVisible(true);
 		
-		//ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
-		//JLabel j2 = new JLabel(piano_1);
 		la.j2.setSize(1600, 712);
 		la.j2.setBounds(0, 189, 1600, 712);
 		this.add(la.j2);
 		this.setLayout(null);
 		this.setVisible(true);
 		
-		la.p1.setBounds(0, 189, 1600, 219);
-		la.p1.setSize(1600, 219);
-		this.add(la.p1);
-		this.setLayout(null);
+		imageLabel.setSize(1600, 219);
+		imageLabel.setBounds(0, 189, 1600, 185);
+		this.add(imageLabel);
+		imageLabel.setLayout(new FlowLayout());
 		this.setVisible(true);
 		
 		JButton btnMusic = new JButton();
@@ -125,29 +125,26 @@ public class StartAction extends JFrame implements ActionListener {
 	    });
 		
 		la.j1.add(btnMusic);
-		//btnMusic.addActionListener(new Music(frame));
+
 		btnMusic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if(check_music == 1) { // 악보보기
-					showMusic(la.j1, la.j2, la.p1);					
-										
+					ImageIcon menu = new ImageIcon("../HaNaPiano/src/image/music_menu.png");
+					la.j1.setIcon(menu);
+					showMusic(la.j1, la.j2);				
 				}else {
+					la.j1.setIcon(la.menu);
 					la.j2.setIcon(la.piano_1);
 					la.j2.setBounds(0, 189, 1600, 712);
 					check_music = 1;
 					title.setVisible(false);
+					musicName = 0;
+					musicNum = 1;
 				}
 			}
-		});
-		
-		Container cc = getContentPane();
-		cc.setFocusable(true);
-		cc.requestFocus();
-		mu = new MusicListener(musicName, musicNum);
-		cc.addKeyListener(mu);
-		
+		});		
 		
 		// 옥타브 올리기
 		btnUp.setBounds(635, 70, 50, 50);
@@ -337,37 +334,124 @@ public class StartAction extends JFrame implements ActionListener {
 			}
 		});
 	}
-	
-	public void test(int musicNum) {
-		this.musicNum = musicNum;
-		//System.out.println("test " + musicNum);
-		//la.p1.setIcon(null);
-		showMusic(la.j1, la.j2, la.p1);
-	}
-	public void showMusic(JLabel j1, JLabel j2, JPanel p1) {
-		// 악보 띄우기		
+
+	public void showMusic(JLabel j1, JLabel j2) {
 		ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
-		Image musicimg = musicImg.getImage();
+		imageLabel.setIcon(musicImg);		
 		
-		//System.out.println("musicn  " + path+music[musicName][musicNum]);
+		JButton back = new JButton();
+		back.setBounds(1455, 100, 49, 39);
+		back.setOpaque(false);
+		back.setContentAreaFilled(false);
+		back.setBorderPainted(false);
+		back.setFocusable(false);
+		back.setBorder(new RoundedBorder(24));
 		
-		//j3.setIcon(new ImageIcon(path+music[musicName][musicNum]));
-		//j3.revalidate();
-		//j3.repaint();
-		//j3.update(j3.getGraphics());
-		//j3.setIcon(musicImg);
-		//j3.setText(path+music[musicName][musicNum]);
-		//System.out.println(j3.getIcon());
+		back.getModel().addChangeListener(new ChangeListener() {
+	        @Override
+	        public void stateChanged(ChangeEvent e) {
+	            ButtonModel model = (ButtonModel) e.getSource();
+	            if (model.isRollover()) {
+	            	back.setBorder(new RoundedBorder(24));
+	            	back.setBorderPainted(true); // 테두리 보이게
+	            } else {
+	            	back.setBorderPainted(false); // 테두리 안보이게
+	            }
+	        }
+	    });
 		
-		//add(j3);
+		JButton next = new JButton();
+		next.setBounds(1518, 100, 49, 39);
+		next.setOpaque(false);
+		next.setContentAreaFilled(false);
+		next.setBorderPainted(false);
+		next.setFocusable(false);
+		next.setBorder(new RoundedBorder(24));
 		
-		//j3.updateUI();
+		next.getModel().addChangeListener(new ChangeListener() {
+	        @Override
+	        public void stateChanged(ChangeEvent e) {
+	            ButtonModel model = (ButtonModel) e.getSource();
+	            if (model.isRollover()) {
+	            	next.setBorder(new RoundedBorder(24));
+	            	next.setBorderPainted(true); // 테두리 보이게
+	            } else {
+	            	next.setBorderPainted(false); // 테두리 안보이게
+	            }
+	        }
+	    });
 		
-		p1.imageUpdate(musicimg, 0, 0, 189, 1600, 219);
+		JButton select = new JButton();
+		select.setBounds(1458, 48, 110, 40);
+		select.setOpaque(false);
+		select.setContentAreaFilled(false);
+		select.setBorderPainted(false);
+		select.setFocusable(false);
+		select.setBorder(new RoundedBorder(24));
 		
+		select.getModel().addChangeListener(new ChangeListener() {
+	        @Override
+	        public void stateChanged(ChangeEvent e) {
+	            ButtonModel model = (ButtonModel) e.getSource();
+	            if (model.isRollover()) {
+	            	select.setBorder(new RoundedBorder(24));
+	            	select.setBorderPainted(true); // 테두리 보이게
+	            } else {
+	            	select.setBorderPainted(false); // 테두리 안보이게
+	            }
+	        }
+	    });
+		
+		
+		next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				musicNum++;
+				if(musicNum < music[musicName].length) {
+					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					imageLabel.setIcon(musicImg);
+				}
+				
+			}
+		});
+		
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				musicNum--;
+				if(musicNum > 0) {
+					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					imageLabel.setIcon(musicImg);
+				}
+			}
+		});
+		
+		select.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				musicName++;
+				musicNum = 1;
+				if(musicName < music.length) {
+					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					imageLabel.setIcon(musicImg);
+					title.setText(music[musicName][0]);
+				}else {
+					musicName = 0;
+					musicNum = 1;
+					ImageIcon musicImg = new ImageIcon(path+music[musicName][musicNum]);
+					imageLabel.setIcon(musicImg);
+					title.setText(music[musicName][0]);
+				}
+			}
+		});
+		
+		add(imageLabel);
+		j1.add(back);
+		j1.add(next);	
+		j1.add(select);
 		
 		title.setText(music[musicName][0]);
-		title.setBounds(180, 35, 200, 100);
+		title.setBounds(180, 35, 300, 100);
 		title.setFont(new Font("SansSerif", Font.BOLD, 35));
 		j1.add(title);
 		j1.setLayout(null);
@@ -390,5 +474,4 @@ class Label{
 	ImageIcon piano_1 = new ImageIcon("../HaNaPiano/src/image/piano_1.png");
 	JLabel j2 = new JLabel(piano_1);
 		
-	JPanel p1 = new JPanel();
 }
