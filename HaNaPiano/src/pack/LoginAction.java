@@ -79,7 +79,7 @@ public class LoginAction extends JFrame implements ActionListener {
 		this.add(la.j1);
 		this.setLayout(null);
 		this.setVisible(true);
-		recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, id); // 녹음 파일입출력 객체
+		recordfile = new RecordFile(KeyListener.recordKey, KeyListener.recordTime, KeyListener.recordOctave, id); // 녹음 파일입출력 객체
 		
 		la.j2.setSize(1600, 712);
 		la.j2.setBounds(0, 189, 1600, 712);

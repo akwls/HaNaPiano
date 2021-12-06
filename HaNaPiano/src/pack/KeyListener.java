@@ -30,6 +30,7 @@ public class KeyListener extends KeyAdapter {
 	public static ArrayList<Integer> recordKey = new ArrayList<>();
 	// 녹음 - 누른 지연 시간 arrayList
 	public static ArrayList<Long> recordTime = new ArrayList<>();
+	public static ArrayList<Integer> recordOctave = new ArrayList<>();
 	
 	public static boolean recording = false; // 녹음 중 변수
 	public static boolean playing = false; // 재생 중 변수
@@ -66,6 +67,7 @@ public class KeyListener extends KeyAdapter {
 	            clip.start();
 	            if(this.recording) { // 녹음 중 변수가 true면
 					recordKey.add(i); // 녹음 키 리스트 add
+					recordOctave.add(octNum);
 					currentSecond = System.currentTimeMillis() - keySecond; // 현재 키가 눌린 시간에서 이전 키가 눌린 시간 빼기
 					recordTime.add(currentSecond); // 지연 시간 리스트 add
 					keySecond = System.currentTimeMillis(); // 이전 키가 눌린 시간에 현재 키가 눌린 시간 넣기
@@ -88,7 +90,7 @@ public class KeyListener extends KeyAdapter {
 			for(int i=0; i<recordKey.size(); i++) {
 				if(!playing) return; // 연주 중 변수가 false면 break
 				Thread.sleep(recordTime.get(i)); // 지연시간 리스트의 i번째 방만큼 지연하기
-				stream = AudioSystem.getAudioInputStream(sounds.get(octNum-3).get(recordKey.get(i))); // 눌린 키 리스트에 해당하는 오디오 파일
+				stream = AudioSystem.getAudioInputStream(sounds.get(recordOctave.get(i)-3).get(recordKey.get(i))); // 눌린 키 리스트에 해당하는 오디오 파일
 				Clip clip = AudioSystem.getClip();
 	            clip.open(stream);
 	            clip.start();
@@ -101,13 +103,13 @@ public class KeyListener extends KeyAdapter {
 		}
 		
 	}
-	public static void recordPlay(String[] recordKey, String[] recordTime) { // int, long
+	public static void recordPlay(String[] recordKey, String[] recordTime, String[] recordOctave) { // int, long
 		AudioInputStream stream;
 		try {
 			for(int i=0; i<recordKey.length; i++) {
 				// if(!playing) return; // 연주 중 변수가 false면 break
 				Thread.sleep(Long.parseLong(recordTime[i])); // 지연시간 리스트의 i번째 방만큼 지연하기
-				stream = AudioSystem.getAudioInputStream(sounds.get(octNum-3).get(Integer.parseInt(recordKey[i]))); // 눌린 키 리스트에 해당하는 오디오 파일
+				stream = AudioSystem.getAudioInputStream(sounds.get(Integer.parseInt(recordOctave[i])-3).get(Integer.parseInt(recordKey[i]))); // 눌린 키 리스트에 해당하는 오디오 파일
 				Clip clip = AudioSystem.getClip();
 	            clip.open(stream);
 	            clip.start();

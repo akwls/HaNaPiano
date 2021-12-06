@@ -323,8 +323,10 @@ public class StartAction extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				KeyListener.recording = true;
 				KeyListener.recordKey.clear();
+				KeyListener.recordTime.clear();
+				KeyListener.recordOctave.clear();
+				KeyListener.recording = true;
 				KeyListener.keySecond = System.currentTimeMillis();
 			}
 			
