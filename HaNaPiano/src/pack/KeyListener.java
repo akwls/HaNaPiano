@@ -67,7 +67,7 @@ public class KeyListener extends KeyAdapter {
 	            clip.start();
 	            if(this.recording) { // 녹음 중 변수가 true면
 					recordKey.add(i); // 녹음 키 리스트 add
-					recordOctave.add(octNum);
+					recordOctave.add(octNum); // 녹음 옥타브 리스트 add
 					currentSecond = System.currentTimeMillis() - keySecond; // 현재 키가 눌린 시간에서 이전 키가 눌린 시간 빼기
 					recordTime.add(currentSecond); // 지연 시간 리스트 add
 					keySecond = System.currentTimeMillis(); // 이전 키가 눌린 시간에 현재 키가 눌린 시간 넣기

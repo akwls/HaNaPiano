@@ -91,7 +91,7 @@ public class Join implements ActionListener{
 		jl.add(text_Name);
 		
 		// 회원가입 버튼
-		btnJoin.setBounds(698, 730, 240, 90);
+		btnJoin.setBounds(698, 731, 240, 91);
 		btnJoin.setOpaque(false);
 		btnJoin.setContentAreaFilled(false);
 		btnJoin.setBorderPainted(false);
