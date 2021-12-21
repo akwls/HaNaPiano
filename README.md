@@ -3,16 +3,17 @@
 ### 사용 기술, 언어
 Java, Eclipse, MySQL
 
-### 실행 화면
+### 1. 실행 화면
 
-메인 화면
 ![image](https://user-images.githubusercontent.com/80630432/146872455-a988f90f-8257-4286-b93d-1196b07415fb.png)
-악보 보기
+메인 화면
 ![image](https://user-images.githubusercontent.com/80630432/146872466-5d715127-451c-4015-8ce4-b03ee2778323.png)
-녹음 리스트
+악보 보기
 ![image](https://user-images.githubusercontent.com/80630432/146872500-478c9b03-c1b2-4884-8071-41bb880b96dc.png)
+녹음 리스트
 
-### 녹음 기능
+### 2. 핵심 기능 & 코드
+#### 2.1 녹음 기능
 녹음 버튼을 누르고 키를 누르면 누른 키와 다음 키를 누르기 까지의 지연 시간이 ArrayList에 저장됩니다.
 녹음 재생 시에는 지연 시간만큼 Sleep 후 키에 대응되는 음을 재생합니다.
 ```
@@ -26,7 +27,7 @@ if(this.recording) { // 녹음 중 변수가 true면
 ```
 
 
-### 로그인
+#### 2.2 로그인
 user 테이블에서 입력받은 아이디가 존재하는지 체크한 후, 비밀번호가 일치하는지 확인합니다. 
 ```
 int login(String id, String pw) {
@@ -73,7 +74,7 @@ int login(String id, String pw) {
 	}
 ```
 
-### 녹음 파일입출력
+#### 2.3 녹음 파일입출력
 로그인했을 경우, 아이디 이름으로 파일을 생성하고 녹음한 내용을 파일에 저장합니다.
 사용자 버튼을 누르면 녹음한 목록이 뜨고 클릭 시, 녹음이 재생됩니다.
 
@@ -124,3 +125,7 @@ public void recordFile() {
 		}
 	}
 ```
+
+### 업무 분담
+- 김하진 : DB(로그인, 회원가입 등), 파일입출력(녹음, 재생 등)
+- 김유나 : GUI(버튼, 악보 등)
